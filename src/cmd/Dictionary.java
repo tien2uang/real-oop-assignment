@@ -9,11 +9,11 @@ public class Dictionary {
         try {
             int start = 0;
             int end = wordList.size();
-            String target = word.getWord_target();
+            String target = word.getWordTarget();
 
             while (start < end) {
                 int middle = (start + end) >> 1;
-                String middleTarget = wordList.get(middle).getWord_target();
+                String middleTarget = wordList.get(middle).getWordTarget();
                 if (target.compareToIgnoreCase(middleTarget) == 0) {
                     return false;
                 }
