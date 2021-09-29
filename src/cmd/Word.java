@@ -6,7 +6,7 @@ public class Word {
 
     public Word() { }
 
-    public String getWord_target() {
+    public String getWordTarget() {
         return  wordTarget;
     }
 
@@ -18,7 +18,7 @@ public class Word {
         return wordExplain;
     }
 
-    public void setWord_explain(String wordExplain) {
+    public void setWordExplain(String wordExplain) {
         this.wordExplain=wordExplain;
     };
 
