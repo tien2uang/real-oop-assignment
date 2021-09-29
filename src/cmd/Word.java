@@ -1,30 +1,30 @@
 package cmd;
 
 public class Word {
-    private String word_target;
-    private String word_explain;
+    private String wordTarget;
+    private String wordExplain;
 
     public Word() { }
 
     public String getWord_target() {
-        return  word_target;
+        return  wordTarget;
     }
 
-    public void setWord_target() {
-        this.word_target = word_target;
+    public void setWordTarget(String wordTarget) {
+        this.wordTarget = wordTarget;
     }
 
-    public String getWord_explain() {
-        return word_explain;
+    public String getWordExplain() {
+        return wordExplain;
     }
 
-    public void setWord_explain() {
-        this.word_explain = word_explain;
-    }
+    public void setWord_explain(String wordExplain) {
+        this.wordExplain=wordExplain;
+    };
 
-    public Word(String word_target, String word_explain) {
-        this.word_target = word_target;
-        this.word_explain = word_explain;
+    public Word(String wordTarget, String wordExplain) {
+        this.wordTarget = wordTarget;
+        this.wordExplain = wordExplain;
     }
 
 }
