@@ -37,4 +37,8 @@ public class Dictionary {
             return false;
         }
     }
+
+    public int getSize() {
+        return wordList.size();
+    }
 }
