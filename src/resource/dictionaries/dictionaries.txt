@@ -1,5 +1,5 @@
 4
-A	a
-D	d
-B	b
-C	c
+Apple   quả táo
+Bean	hạt đậu
+Chair   ghế
+Duck    vịt
