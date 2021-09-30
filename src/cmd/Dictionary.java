@@ -37,4 +37,8 @@ public class Dictionary {
             return false;
         }
     }
+
+    public ArrayList<Word> getWordList() {
+        return wordList;
+    }
 }
