@@ -16,7 +16,6 @@ import java.util.StringTokenizer;
 
 public class DictionaryManagement {
     private Dictionary dictionaryData;
-    int wordListSize = this.dictionaryData.getWordListSize();
 
 
     public DictionaryManagement(Dictionary d) {
@@ -86,7 +85,7 @@ public class DictionaryManagement {
         Scanner scanner = new Scanner(System.in);
         String newWordTarget, newWordExplain;
 
-        int index = this.dictionaryData.searchIndexWord(0, wordListSize, wordToEdit);
+        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size()-1, wordToEdit);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
@@ -96,6 +95,7 @@ public class DictionaryManagement {
             this.dictionaryData.getWordList().get(index).setWordTarget(newWordTarget);
             this.dictionaryData.getWordList().get(index).setWordExplain(newWordExplain);
         }
+        scanner.close();
     }
 
     /**
@@ -103,7 +103,7 @@ public class DictionaryManagement {
      */
     public void removeWordInDectionary(String wordToRemove) {
 
-        int index = this.dictionaryData.searchIndexWord(0, wordListSize, wordToRemove);
+        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size()-1, wordToRemove);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn xóa");
         } else {
