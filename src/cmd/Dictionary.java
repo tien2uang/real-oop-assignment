@@ -37,6 +37,9 @@ public class Dictionary {
         }
     }
 
+    public void removeWord(String target) {
+    }
+
     public Word getWord(String target) {
         try {
             int start = 0;
@@ -45,12 +48,12 @@ public class Dictionary {
             while (start < end) {
                 int middle = (start + end) / 2;
                 String middleTarget = wordList.get(middle).getWordTarget();
-                if(target.compareToIgnoreCase(middleTarget) == 0){
+                if (target.compareToIgnoreCase(middleTarget) == 0) {
                     return wordList.get(middle);
-                }else if(target.compareToIgnoreCase(middleTarget)>0){
-                    start=middle+1;
-                }else {
-                    end=middle-1;
+                } else if (target.compareToIgnoreCase(middleTarget) > 0) {
+                    start = middle + 1;
+                } else {
+                    end = middle - 1;
                 }
             }
             return null;
