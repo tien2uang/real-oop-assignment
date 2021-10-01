@@ -65,6 +65,10 @@ public class Dictionary {
         }
     }
 
+    public Word getWord(int i) {
+        return this.wordList.get(i);
+    }
+
     /**
      * tìm vị trí của từ tiếng Anh trong wordList.
      *

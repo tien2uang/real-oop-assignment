@@ -22,6 +22,16 @@ public class DictionaryManagement {
         this.dictionaryData = d;
     }
 
+    public void insertFromCommandLine() {
+        Scanner input = new Scanner(System.in);
+        int wordCount = input.nextInt();
+        for (int i = 0; i < wordCount; i++) {
+            String target = input.nextLine();
+            String explain = input.nextLine();
+            this.dictionaryData.addWord(new Word(target, explain));
+        }
+    }
+
     public void insertFromFile(String directory) {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(directory), "UTF8");
@@ -71,17 +81,26 @@ public class DictionaryManagement {
     }
 
     public void showAllWords() {
+        /**
         for (Word word : dictionaryData.getWordList()) {
             System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
         }
-
+         */
+        System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
+        int size = this.dictionaryData.getWordListSize();
+        for (int i = 0; i < size; i++) {
+            Word word = this.dictionaryData.getWord(i);
+            String target = word.getWordTarget();
+            String explain = word.getWordExplain();
+            System.out.printf("%-5d|%-20s|%s%n", (i + 1), target, explain);
+        }
     }
 
 
     /**
      * sửa từ trong từ điển.
      */
-    public void editWordInDectionary(String wordToEdit) {
+    public void editWordInDictionary(String wordToEdit) {
         Scanner scanner = new Scanner(System.in);
         String newWordTarget, newWordExplain;
 
@@ -101,7 +120,7 @@ public class DictionaryManagement {
     /**
      * xóa một từ trong từ điển.
      */
-    public void removeWordInDectionary(String wordToRemove) {
+    public void removeWordInDictionary(String wordToRemove) {
 
         int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size()-1, wordToRemove);
         if (index == -1) {
