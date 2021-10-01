@@ -1,5 +1,4 @@
-4
-Apple   quả táo
-Bean	hạt đậu
-Chair   ghế
-Duck    vịt
+Apple:quả táo
+Bean:hạt đậu
+Chair:ghế
+Duck:vịt
