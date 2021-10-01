@@ -2,12 +2,16 @@ package cmd;
 
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DictionaryManagement {
     private Dictionary dictionaryData;
+    int wordListSize = this.dictionaryData.getWordListSize();
 
     public DictionaryManagement(Dictionary d) {
         this.dictionaryData = d;
@@ -46,8 +50,69 @@ public class DictionaryManagement {
         }
 
     }
-    public void exportToFile() {
+
+    /**
+     * sửa từ trong từ điển.
+     */
+    public void editWordInDectionary(String wordToEdit) {
+        Scanner scanner = new Scanner(System.in);
+        String newWordTarget, newWordExplain;
+
+        int index = this.dictionaryData.searchIndexWord(0, wordListSize, wordToEdit);
+        if (index == -1) {
+            System.out.println("không tìm thấy từ muốn thay thế");
+        } else {
+            newWordTarget = scanner.nextLine();
+            newWordExplain = scanner.nextLine();
+
+            this.dictionaryData.getWordList().get(index).setWordTarget(newWordTarget);
+            this.dictionaryData.getWordList().get(index).setWordExplain(newWordExplain);
+        }
+    }
+
+    /**
+     * xóa một từ trong từ điển.
+     */
+    public void removeWordInDectionary(String wordToRemove) {
+
+        int index = this.dictionaryData.searchIndexWord(0, wordListSize, wordToRemove);
+        if (index == -1) {
+            System.out.println("không tìm thấy từ muốn xóa");
+        } else {
+            this.dictionaryData.getWordList().remove(index);
+        }
 
     }
 
+    public void dictionarySearcher(String wordSearch) {
+
+        ArrayList<Word> words = this.dictionaryData.searcher(wordSearch);
+
+        for (Word word : words) {
+            System.out.print(word.getWordTarget() + ", ");
+        }
+    }
+
+    /**
+     * xuất dữ liệu từ điển hiện tại ra file.
+     */
+    public static void dictionaryExportToFile(ArrayList<Word> words) {
+        try {
+            FileWriter fw = new FileWriter("dictionaries.txt",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for(Word word : words) {
+                bw.write(word.getWordTarget() + "\t" + word.getWordExplain());
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
+
+
+
