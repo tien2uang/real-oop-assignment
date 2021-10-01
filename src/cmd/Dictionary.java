@@ -43,10 +43,9 @@ public class Dictionary {
     public Word getWord(String target) {
         try {
             int start = 0;
-            int end = wordList.size();
-
-            while (start < end) {
-                int middle = (start + end) / 2;
+            int end = wordList.size() - 1;
+            while (start <= end) {
+                int middle = start + (end - start) / 2;
                 String middleTarget = wordList.get(middle).getWordTarget();
                 if (target.compareToIgnoreCase(middleTarget) == 0) {
                     return wordList.get(middle);
@@ -59,7 +58,7 @@ public class Dictionary {
             return null;
 
 
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             System.out.println("Error!");
             e.printStackTrace();
             return null;
@@ -68,6 +67,7 @@ public class Dictionary {
 
     /**
      * tìm vị trí của từ tiếng Anh trong wordList.
+     *
      * @param start
      * @param end
      * @param target
@@ -82,12 +82,12 @@ public class Dictionary {
                 int middle = (start + end) / 2;
                 String middleTarget = wordList.get(middle).getWordTarget();
 
-                if(target.compareTo(middleTarget) == 0){
+                if (target.compareTo(middleTarget) == 0) {
                     return middle;
-                }else if(target.compareToIgnoreCase(middleTarget)>0){
-                    start=middle+1;
-                }else {
-                    end=middle-1;
+                } else if (target.compareToIgnoreCase(middleTarget) > 0) {
+                    start = middle + 1;
+                } else {
+                    end = middle - 1;
                 }
             }
             return -1;
@@ -102,6 +102,7 @@ public class Dictionary {
 
     /**
      * tìm vị trí của từ bắt đầu bằng wordSearch.
+     *
      * @param start
      * @param end
      * @param target
@@ -118,9 +119,9 @@ public class Dictionary {
 
                 if (middleTarget.startsWith(target)) {
                     return middle;
-                }else if(target.compareToIgnoreCase(middleTarget)>0){
-                    start=middle+1;
-                }else {
+                } else if (target.compareToIgnoreCase(middleTarget) > 0) {
+                    start = middle + 1;
+                } else {
                     end = middle - 1;
                 }
             }
@@ -166,7 +167,7 @@ public class Dictionary {
         return wordList;
     }
 
-    public  int getWordListSize() {
+    public int getWordListSize() {
         return wordList.size();
     }
 
