@@ -110,11 +110,8 @@ public class Dictionary {
      */
     public int StartWithWordSearch(int start, int end, String target) {
         try {
-            start = 0;
-            end = wordList.size();
-
-            while (start < end) {
-                int middle = (start + end) / 2;
+            while (start <= end) {
+                int middle = start + (end - start) / 2;
                 String middleTarget = wordList.get(middle).getWordTarget();
 
                 if (middleTarget.startsWith(target)) {
