@@ -54,7 +54,11 @@ public class TestDictionary {
         for (Word word : dictionary.getWordList()) {
             System.out.println(word.getWordTarget());
         }
-        Assert.assertEquals(4,dictionary.searchIndexWord(0,dictionary.getWordList().size()-1,"ear"));
+        //Assert.assertEquals(4,dictionary.searchIndexWord(0,dictionary.getWordList().size()-1,"ear"));
+        int result = dictionary.searchIndexWord(0,dictionary.getWordList().size()-1,"ear");
+        System.out.println(result);
     }
+
+
 
 }
