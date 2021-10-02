@@ -34,10 +34,9 @@ public class DictionaryManagement {
 
     public void insertFromFile(String directory) {
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(directory), "UTF8");
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
+            Scanner scanner = new Scanner(new File(directory));
+            while (scanner.hasNextLine()) {
+                String line=scanner.nextLine();
                 String[] words = line.split(":");
                 dictionaryData.addWord(new Word(words[0], words[1]));
             }
