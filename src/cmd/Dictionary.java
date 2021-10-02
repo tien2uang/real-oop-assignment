@@ -37,9 +37,6 @@ public class Dictionary {
         }
     }
 
-    public void removeWord(String target) {
-    }
-
     public Word getWord(String target) {
         try {
             int start = 0;

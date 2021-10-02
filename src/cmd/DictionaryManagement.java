@@ -108,7 +108,9 @@ public class DictionaryManagement {
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
+            System.out.println("Enter new target: ");
             newWordTarget = scanner.nextLine();
+            System.out.println("Enter new meaning: ");
             newWordExplain = scanner.nextLine();
 
             this.dictionaryData.getWordList().get(index).setWordTarget(newWordTarget);
@@ -143,7 +145,7 @@ public class DictionaryManagement {
     /**
      * xuất dữ liệu từ điển hiện tại ra file.
      */
-    public static void dictionaryExportToFile(ArrayList<Word> words) {
+    public void dictionaryExportToFile(ArrayList<Word> words) {
         try {
             FileWriter fw = new FileWriter("dictionaries.txt",true);
             BufferedWriter bw = new BufferedWriter(fw);
