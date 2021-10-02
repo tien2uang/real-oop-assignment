@@ -12,7 +12,4 @@ public class DictionaryCommandline {
 
     }
 
-    public static void main(String[] args) {
-        (new DictionaryCommandline()).dictionaryBasic();
-    }
 }
