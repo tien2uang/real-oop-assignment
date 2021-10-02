@@ -76,14 +76,12 @@ public class Dictionary {
      */
     public int searchIndexWord(int start, int end, String target) {
         try {
-            start = 0;
-            end = wordList.size();
 
-            while (start < end) {
+            while (start <= end) {
                 int middle = (start + end) / 2;
                 String middleTarget = wordList.get(middle).getWordTarget();
 
-                if (target.compareTo(middleTarget) == 0) {
+                if (target.equals(middleTarget)) {
                     return middle;
                 } else if (target.compareToIgnoreCase(middleTarget) > 0) {
                     start = middle + 1;
