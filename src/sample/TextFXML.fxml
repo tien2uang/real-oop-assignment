@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="632.0" prefWidth="786.0" style="-fx-background-color: #EDEFF3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <HBox layoutY="46.0">
+         <children>
+            <HBox>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="780.0">
+                     <children>
+                        <Pane prefHeight="84.0" prefWidth="193.0">
+                           <children>
+                              <Label alignment="CENTER" layoutY="4.0" prefHeight="90.0" prefWidth="141.0" text="Text">
+                                 <font>
+                                    <Font name="Segoe UI Symbol" size="43.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="15.0" />
+                                 </padding>
+                              </Label>
+                              <Separator layoutX="32.0" layoutY="80.0" prefHeight="0.0" prefWidth="714.0" style="-fx-background-color: #C6C6C6;" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Pane>
+                        <FontAwesomeIconView glyphName="BOOKMARK_ALT" size="30" styleClass="icon" wrappingWidth="30.0">
+                           <HBox.margin>
+                              <Insets left="460.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <FontAwesomeIconView glyphName="FORWARD" size="30" styleClass="icon">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="27.0" layoutY="151.0" prefHeight="438.0" prefWidth="724.0" style="-fx-background-color: rgb(255,255,255); -fx-background-radius: 15px;" stylesheets="@../css/class.css">
+         <children>
+            <Pane layoutX="-2.0" layoutY="23.0" prefHeight="49.0" prefWidth="709.0">
+               <children>
+                  <Button layoutX="326.0" layoutY="7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="58.0" styleClass="button2" stylesheets="@../css/class.css">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="18" wrappingWidth="15.428571701049805" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane layoutX="408.0" layoutY="3.0" opacity="0.72" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: #B1BDC5; -fx-background-radius: 20px;">
+                     <children>
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="Vietnamese" textFill="#0058ab">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="191.0" layoutY="3.0" opacity="0.72" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: #B1BDC5; -fx-background-radius: 20px;">
+                     <children>
+                        <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="English" textFill="#0058ab">
+                           <font>
+                              <Font name="Segoe UI Semilight" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" styleClass="button3" stylesheets="@../css/class.css">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="VOLUME_UP" size="25" wrappingWidth="18.928571701049805" />
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+            <JFXTextArea editable="false" focusColor="#2d51bc" layoutX="379.0" layoutY="105.0" prefHeight="229.0" prefWidth="291.0" promptText="Result" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00">
+               <font>
+                  <Font name="Segoe UI Semilight" size="17.0" />
+               </font>
+            </JFXTextArea>
+            <JFXTextArea labelFloat="true" layoutX="31.0" layoutY="105.0" prefHeight="229.0" prefWidth="291.0" promptText="Your Text" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semilight" size="17.0" />
+               </font>
+            </JFXTextArea>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

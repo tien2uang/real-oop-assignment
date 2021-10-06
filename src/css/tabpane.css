@@ -1,0 +1,28 @@
+.tab
+{
+    -fx-pref-width: 100px;
+
+    -fx-cursor: hand;
+}
+.tab .tab-label {
+    -fx-alignment: BASELINE-LEFT;
+    -fx-text-fill: rgb(12,13,14);
+    -fx-font-family:"Segoe UI Semibold";
+
+}
+.tab:hover .tab-label
+{
+-fx-text-fill: rgb(10,149,255);
+}
+
+.tab-header-background
+{
+ -fx-background-color: #EDEFF3;
+}
+.jfx-tab-pane .tab-selected-line
+{
+    -fx-border-color: black;
+}
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-radius:0px;
+}

@@ -1,0 +1,73 @@
+.root
+{
+
+}
+.textarea {
+
+}
+.logo
+{
+-fx-background-color:rgb(44,50,57);
+-fx-font-size: 24;
+
+}
+.button2
+{
+-fx-background-color: rgb(48,46,201);
+-fx-background-radius:15px;
+-fx-cursor: hand;
+}
+.button2:hover
+{
+-fx-background-color:#3F8E9F;
+}
+.text-field {
+    -fx-background-color:white;
+    -fx-background-radius: 0;
+
+}
+.text-field:hover
+{
+-fx-border-color: #a768f3;
+}
+.listview
+{
+-fx-border-color:  #B4B6B5;
+
+}
+
+.button3
+{
+-fx-background-color: #ffffff;
+-fx-background-radius:7px;
+-fx-cursor: hand;
+}
+.button3:hover
+{
+-fx-background-color: #B1BDC5;
+
+}
+
+
+.icon
+{
+-fx-background-color:#B6B5C3;
+}
+
+.button1
+{
+-fx-cursor: hand;
+-fx-font-family:"Segoe UI Semibold";
+-fx-background-color:rgb(44,50,57);
+-fx-font-size: 19px;
+-fx-text-fill: #9FADBD;
+}
+.button1:hover
+{
+-fx-text-fill:rgb(255,255,255);
+-fx-background-color: #5A6068;
+-fx-border-width:0px 0px 0px 3px;
+-fx-border-color:#92D980;
+
+
+}
