@@ -67,6 +67,25 @@ public class DictionaryManagement {
 
     }
 
+    /**
+     * insert mới.
+     * @param directory
+     */
+    public void insertFromFilenew(String directory) {
+        try {
+            Scanner scanner = new Scanner(new File(directory));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] words = line.split("/", 2);
+                dictionaryData.addWord(new Word(words[0], words[1]));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Khong tim thay file database.");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public Dictionary getDictionaryData() {
         return dictionaryData;
     }
@@ -104,6 +123,51 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * tách xâu.
+     * @param explain
+     * @return
+     */
+    public ArrayList tachxau(String explain) {
+        ArrayList<String> word = new ArrayList<>();
+        String[] explain_ = explain.split("/");
+        String[] new_explain = explain_[explain_.length - 1].split("-");
+
+        for (int i = 0; i < explain_.length - 1; i++) {
+            word.add(explain_[i].replace("*", ""));
+        }
+
+        for (int i = 0; i < new_explain.length; i++) {
+            word.add(new_explain[i].replace("*", ""));
+        }
+
+        for (int i = 0; i < word.size(); i++) {
+            word.get(i).replace("*", "");
+        }
+        return word;
+
+    }
+
+    public void showAllWordsnew() {
+        System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
+        int size = this.dictionaryData.getWordListSize();
+        for (int i = 0; i < size; i++) {
+            Word word = this.dictionaryData.getWord(i);
+            String target = word.getWordTarget();
+            String explain = word.getWordExplain();
+
+            ArrayList<String> new_explain = tachxau(explain);
+
+            System.out.println(target);
+            for(int j = 0; j < new_explain.size(); j++) {
+                System.out.println(new_explain.get(j));
+            }
+            System.out.println("===================");
+
+        }
+
+    }
+
 
     /**
      * sửa từ trong từ điển.
@@ -116,6 +180,7 @@ public class DictionaryManagement {
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
+
             System.out.println("Enter new target: ");
             newWordTarget = scanner.nextLine();
             System.out.println("Enter new meaning: ");
