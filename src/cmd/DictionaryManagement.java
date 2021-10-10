@@ -2,20 +2,21 @@ package cmd;
 
 
 import com.sun.org.apache.xml.internal.utils.StringToStringTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.*;
 
 import java.io.*;
 
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
 public class DictionaryManagement {
     private Dictionary dictionaryData;
+    public static ArrayList<Word> listWord = new ArrayList<>();
+    public static List<String> listWordTarget = new ArrayList<>();
 
 
     public DictionaryManagement(Dictionary d) {
@@ -47,7 +48,7 @@ public class DictionaryManagement {
         }
     }
 
-    public void insertFromFileAdvanced(String directory) {
+    public static void insertFromFileAdvanced(String directory) {
         try {
             Scanner scanner = new Scanner(new File(directory));
 
@@ -75,8 +76,16 @@ public class DictionaryManagement {
      * @return trả về null nếu không tìm thấy,còn không trả về Word
      */
     public Word dictionaryLookUp(String wordTarget) {
-
         return this.dictionaryData.getWord(wordTarget);
+    }
+
+    public String lookWordMeaning(String wordTarget) {
+        for (int i = 0; i < listWord.size(); i++) {
+            if (listWord.get(i).getWordTarget().toLowerCase().equals(wordTarget.toLowerCase())) {
+                return listWord.get(i).getWordExplain();
+            }
+        }
+        return "";
     }
 
     public void showAllWords() {
@@ -161,8 +170,40 @@ public class DictionaryManagement {
         }
     }
 
+    public ObservableList<String> listTarget(String target) {
+        int size = listWord.size();
+        ObservableList<String> listTarget = FXCollections.observableArrayList();
 
+        if (target.isEmpty()) {
+            for (int i=0; i< size; i++) {
+                listTarget.add(listWord.get(i).getWordTarget());
+            }
+        } else {
+            for (int i = 0;i < size;i++) {
+                if (listWord.get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
+                    listTarget.add(listWord.get(i).getWordTarget());
+                }
+            }
+        }
+        return listTarget;
+    }
 
+    public static void InsertFromFile() throws IOException {
+        try {
+            Scanner input = new Scanner(new File("src/Database/Dictionaries.txt"));
+            while (input.hasNext()) {
+                String word = input.nextLine();
+                String word_mean = input.nextLine();
+                listWord.add(new Word(word, word_mean));
+            }
+            for (int i = 0; i < listWord.size(); i++) {
+                listWordTarget.add(listWord.get(i).getWordTarget());
+            }
+            input.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
