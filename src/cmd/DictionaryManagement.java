@@ -107,6 +107,7 @@ public class DictionaryManagement {
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
+
             System.out.println("Enter new target: ");
             newWordTarget = scanner.nextLine();
             System.out.println("Enter new meaning: ");
