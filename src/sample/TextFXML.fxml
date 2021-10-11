@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="632.0" prefWidth="786.0" style="-fx-background-color: #EDEFF3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TextController">
    <children>
       <HBox layoutY="46.0">
@@ -57,7 +56,7 @@
          <children>
             <Pane layoutX="-2.0" layoutY="23.0" prefHeight="49.0" prefWidth="709.0">
                <children>
-                  <Button layoutX="326.0" layoutY="7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="58.0" styleClass="button2" stylesheets="@../css/class.css">
+                  <Button fx:id="changeLanguageButton" layoutX="326.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleLanguageChange" prefHeight="36.0" prefWidth="58.0" styleClass="button2" stylesheets="@../css/class.css">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="18" wrappingWidth="15.428571701049805" />
                      </graphic>
@@ -67,7 +66,7 @@
                   </Button>
                   <Pane layoutX="408.0" layoutY="3.0" opacity="0.72" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: #B1BDC5; -fx-background-radius: 20px;">
                      <children>
-                        <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="Vietnamese" textFill="#0058ab">
+                        <Label fx:id="secondLanguage" alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="Vietnamese" textFill="#0058ab">
                            <font>
                               <Font name="Segoe UI Semilight" size="16.0" />
                            </font>
@@ -76,7 +75,7 @@
                   </Pane>
                   <Pane layoutX="191.0" layoutY="3.0" opacity="0.72" prefHeight="44.0" prefWidth="108.0" style="-fx-background-color: #B1BDC5; -fx-background-radius: 20px;">
                      <children>
-                        <Label alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="English" textFill="#0058ab">
+                        <Label fx:id="firstLanguage" alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="87.0" text="English" textFill="#0058ab">
                            <font>
                               <Font name="Segoe UI Semilight" size="16.0" />
                            </font>
@@ -90,16 +89,17 @@
                   </Button>
                </children>
             </Pane>
-            <JFXTextArea editable="false" focusColor="#2d51bc" layoutX="379.0" layoutY="105.0" prefHeight="229.0" prefWidth="291.0" promptText="Result" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00">
+            <JFXTextArea fx:id="outputText" editable="false" focusColor="#2d51bc" labelFloat="true" layoutX="379.0" layoutY="105.0" prefHeight="229.0" prefWidth="291.0" promptText="Result" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00">
                <font>
-                  <Font name="Segoe UI Semilight" size="17.0" />
+                  <Font name="Segoe UI Semilight" size="20.0" />
                </font>
             </JFXTextArea>
-            <JFXTextArea labelFloat="true" layoutX="31.0" layoutY="105.0" prefHeight="229.0" prefWidth="291.0" promptText="Your Text" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00" wrapText="true">
+            <JFXTextArea fx:id="inputText" labelFloat="true" layoutX="31.0" layoutY="105.0" onKeyReleased="#handleInput" prefHeight="229.0" prefWidth="291.0" promptText="Your Text" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00" wrapText="true">
                <font>
-                  <Font name="Segoe UI Semilight" size="17.0" />
+                  <Font name="Segoe UI Semilight" size="20.0" />
                </font>
             </JFXTextArea>
+            <Label fx:id="translatingLabel" layoutX="379.0" layoutY="334.0" prefHeight="30.0" prefWidth="108.0" text="Translating..." textFill="#0058ab" />
          </children>
       </AnchorPane>
    </children>
