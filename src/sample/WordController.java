@@ -1,9 +1,10 @@
 package sample;
 
-import animatefx.animation.FadeIn;
+import Translate.GoogleTTS;
 import cmd.Dictionary;
 import cmd.Word;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -77,7 +78,7 @@ public class WordController implements Initializable {
             wordMeaning.setText(word.getWordExplain());
         }
     }
-
+    
     public void clickWord(MouseEvent event) {
         try {
             String inputMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
@@ -106,6 +107,11 @@ public class WordController implements Initializable {
             System.out.println("Error!");
         }
     }
+    public void speak(ActionEvent actionEvent) throws IOException {
+        if(actionEvent.getSource()==speakingButton){
+            GoogleTTS.speak(wordTarget.getText());
+        }
+    }
 
 
     @Override
@@ -114,6 +120,6 @@ public class WordController implements Initializable {
         speakingButton.setVisible(false);
         speakingButton.setDisable(true);
         definitions.setVisible(false);
-        DictionaryManagement.InsertFromFile("resource/dictionaries/dictionaries.txt");
+        DictionaryManagement.InsertFromFile("resource/dictionaries/dict.txt");
     }
 }

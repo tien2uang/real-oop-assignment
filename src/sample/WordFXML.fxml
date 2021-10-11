@@ -89,7 +89,7 @@
                      </font>
                   </Label>
                   <JFXTextArea fx:id="wordMeaning" focusColor="#405aa800" layoutX="15.0" layoutY="151.0" prefHeight="235.0" prefWidth="374.0" styleClass="textarea" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00" />
-                  <Button fx:id="speakingButton" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="26.0" styleClass="button3" stylesheets="@../css/class.css">
+                  <Button fx:id="speakingButton" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#speak" prefHeight="30.0" prefWidth="26.0" styleClass="button3" stylesheets="@../css/class.css">
                      <graphic>
                         <FontAwesomeIconView glyphName="VOLUME_UP" />
                      </graphic>
