@@ -242,6 +242,9 @@ public class DictionaryManagement extends Dictionary {
                 }
             }
         }
+        if(listTarget.size()==0){
+            listTarget.add("No result");
+        }
         return listTarget;
     }
 

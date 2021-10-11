@@ -1,5 +1,6 @@
 package sample;
 
+import animatefx.animation.FadeIn;
 import cmd.Dictionary;
 import cmd.Word;
 import com.jfoenix.controls.JFXTextArea;
@@ -44,8 +45,14 @@ public class WordController implements Initializable {
     private Label definitions;
     @FXML
     private Button speakingButton;
+
     public void updateListView() {
         String word = inputSearch.getText();
+        if (word.length() > 0) {
+            wordListSearch.setVisible(true);
+        } else {
+            wordListSearch.setVisible(false);
+        }
         wordListSearch.setItems((new DictionaryManagement(this.dictionaryData)).listTarget(word));
     }
 
@@ -74,25 +81,27 @@ public class WordController implements Initializable {
     public void clickWord(MouseEvent event) {
         try {
             String inputMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
-            inputSearch.setText(inputMouseSetText);
-            String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
-            Word word = new DictionaryManagement(this.dictionaryData).getWord(wordMeaningMouseSetText);
-            if (word.getWordSpelling().contains(";")) {
-                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
-                String firstSpelling = wordText.nextToken();
-                String secondSpelling = wordText.nextToken();
-                wordSpellings.setText(firstSpelling);
-                wordSecondSpellings.setText(secondSpelling);
-            } else {
-                wordSpellings.setText(word.getWordSpelling());
-                wordSecondSpellings.setText("");
+            if(inputMouseSetText!="No result") {
+                inputSearch.setText(inputMouseSetText);
+                String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
+                Word word = new DictionaryManagement(this.dictionaryData).getWord(wordMeaningMouseSetText);
+                if (word.getWordSpelling().contains(";")) {
+                    StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
+                    String firstSpelling = wordText.nextToken();
+                    String secondSpelling = wordText.nextToken();
+                    wordSpellings.setText(firstSpelling);
+                    wordSecondSpellings.setText(secondSpelling);
+                } else {
+                    wordSpellings.setText(word.getWordSpelling());
+                    wordSecondSpellings.setText("");
+                }
+                speakingButton.setVisible(true);
+                definitions.setVisible(true);
+                speakingButton.setDisable(false);
+                wordTarget.setText(word.getWordTarget());
+                wordClass.setText(word.getWordClass());
+                wordMeaning.setText(word.getWordExplain());
             }
-            speakingButton.setVisible(true);
-            definitions.setVisible(true);
-            speakingButton.setDisable(false);
-            wordTarget.setText(word.getWordTarget());
-            wordClass.setText(word.getWordClass());
-            wordMeaning.setText(word.getWordExplain());
         } catch (NullPointerException e) {
             System.out.println("Error!");
         }
@@ -101,6 +110,7 @@ public class WordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        wordListSearch.setVisible(false);
         speakingButton.setVisible(false);
         speakingButton.setDisable(true);
         definitions.setVisible(false);
