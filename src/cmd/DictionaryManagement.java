@@ -38,7 +38,7 @@ public class DictionaryManagement extends Dictionary {
         try {
             Scanner scanner = new Scanner(new File(directory));
             while (scanner.hasNextLine()) {
-                String line=scanner.nextLine();
+                String line = scanner.nextLine();
                 String[] words = line.split(":");
                 dictionaryData.addWord(new Word(words[0], words[1]));
             }
@@ -53,12 +53,12 @@ public class DictionaryManagement extends Dictionary {
         try {
             Scanner scanner = new Scanner(new File(directory));
 
-            for (int i=0;i<20;i++){
-                String line =scanner.nextLine();
-                StringTokenizer stringTokenizer= new StringTokenizer(line,"/");
-                System.out.println("Number: "+i);
-                while (stringTokenizer.hasMoreTokens()){
-                    System.out.println(stringTokenizer.nextToken().replaceAll("^\\s+",""));
+            for (int i = 0; i < 20; i++) {
+                String line = scanner.nextLine();
+                StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
+                System.out.println("Number: " + i);
+                while (stringTokenizer.hasMoreTokens()) {
+                    System.out.println(stringTokenizer.nextToken().replaceAll("^\\s+", ""));
 
                 }
             }
@@ -70,6 +70,7 @@ public class DictionaryManagement extends Dictionary {
 
     /**
      * insert mới.
+     *
      * @param directory
      */
     public void insertFromFilenew(String directory) {
@@ -102,9 +103,9 @@ public class DictionaryManagement extends Dictionary {
 
     public void showAllWords() {
         /**
-        for (Word word : dictionaryData.getWordList()) {
-            System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
-        }
+         for (Word word : dictionaryData.getWordList()) {
+         System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
+         }
          */
         System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
         int size = this.dictionaryData.getWordListSize();
@@ -118,6 +119,7 @@ public class DictionaryManagement extends Dictionary {
 
     /**
      * tách xâu.
+     *
      * @param explain
      * @return
      */
@@ -152,7 +154,7 @@ public class DictionaryManagement extends Dictionary {
             ArrayList<String> new_explain = tachxau(explain);
 
             System.out.println(target);
-            for(int j = 0; j < new_explain.size(); j++) {
+            for (int j = 0; j < new_explain.size(); j++) {
                 System.out.println(new_explain.get(j));
             }
             System.out.println("===================");
@@ -169,7 +171,7 @@ public class DictionaryManagement extends Dictionary {
         Scanner scanner = new Scanner(System.in);
         String newWordTarget, newWordExplain;
 
-        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size()-1, wordToEdit);
+        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size() - 1, wordToEdit);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
@@ -190,7 +192,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void removeWordInDictionary(String wordToRemove) {
 
-        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size()-1, wordToRemove);
+        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size() - 1, wordToRemove);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn xóa");
         } else {
@@ -213,10 +215,10 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryExportToFile(ArrayList<Word> words) {
         try {
-            FileWriter fw = new FileWriter("dictionaries.txt",true);
+            FileWriter fw = new FileWriter("dictionaries.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for(Word word : words) {
+            for (Word word : words) {
                 bw.write(word.getWordTarget() + "\t" + word.getWordExplain());
                 bw.newLine();
             }
@@ -232,17 +234,17 @@ public class DictionaryManagement extends Dictionary {
         ObservableList<String> listTarget = FXCollections.observableArrayList();
 
         if (target.isEmpty()) {
-            for (int i=0; i< size; i++) {
+            for (int i = 0; i < size; i++) {
                 listTarget.add(wordList.get(i).getWordTarget());
             }
         } else {
-            for (int i = 0;i < size;i++) {
+            for (int i = 0; i < size; i++) {
                 if (wordList.get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
                     listTarget.add(wordList.get(i).getWordTarget());
                 }
             }
         }
-        if(listTarget.size()==0){
+        if (listTarget.size() == 0) {
             listTarget.add("No result");
         }
         return listTarget;
@@ -263,6 +265,9 @@ public class DictionaryManagement extends Dictionary {
             Scanner scanner = new Scanner(new File(path));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
+                if (line.equals("THE-END")) {
+                    break;
+                }
                 if (checkTypeOfLine(line) == SINGLE_SPELLINGS) {
                     StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
                     String target = stringTokenizer.nextToken().trim();
@@ -295,24 +300,26 @@ public class DictionaryManagement extends Dictionary {
                     StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
                     String target = stringTokenizer.nextToken().trim();
                     String firstSpellings = "/" + stringTokenizer.nextToken() + "/";
-                    String tmp=stringTokenizer.nextToken().trim();
-                    String secondSpellings ="/" + stringTokenizer.nextToken() + "/";
+                    String tmp = stringTokenizer.nextToken().trim();
+                    String secondSpellings = "/" + stringTokenizer.nextToken() + "/";
                     String spellings = firstSpellings + " , " + secondSpellings;
                     String temp = stringTokenizer.nextToken().trim();
                     stringTokenizer = new StringTokenizer(temp, "*");
                     String temp1 = stringTokenizer.nextToken();
                     stringTokenizer = new StringTokenizer(temp1.trim(), "\t");
-                    String wordClass = "* "+  stringTokenizer.nextToken().trim();
+                    String wordClass = "* " + stringTokenizer.nextToken().trim();
                     String explain = "";
                     while (stringTokenizer.hasMoreTokens()) {
                         String text = stringTokenizer.nextToken();
                         if (text.contains("=")) {
-                            explain+="  "+text+"\n";
+                            explain += "  " + text + "\n";
                         } else {
-                            explain +=  text + "\n";
+                            explain += text + "\n";
                         }
                     }
                     wordList.add(new Word(target, explain, spellings, wordClass));
+                } else {
+                    continue;
                 }
             }
             scanner.close();
