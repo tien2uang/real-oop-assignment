@@ -3,7 +3,7 @@ package cmd;
 import java.util.ArrayList;
 
 public class Dictionary {
-    private  ArrayList<Word> wordList = new ArrayList<>();
+    public static  ArrayList<Word> wordList = new ArrayList<>();
 
     public boolean addWord(Word word) {
         try {
@@ -167,14 +167,5 @@ public class Dictionary {
         return wordList.size();
     }
 
-    public static int checkTypeOfLine(String line) {
-        int count = 0;
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == '/') {
-                count++;
-            }
-        }
-        return count;
-    }
 
 }

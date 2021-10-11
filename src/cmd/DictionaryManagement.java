@@ -17,8 +17,7 @@ public class DictionaryManagement extends Dictionary {
     private Dictionary dictionaryData;
     private static int SINGLE_SPELLINGS = 2;
     private static int MULTIPLE_SPELLINGS = 4;
-    public static List<String> listWordTarget = new ArrayList<>();
-    public static ArrayList<Word> listWord = new ArrayList<>();
+    private static List<String> listWordTarget = new ArrayList<>();
 
 
     public DictionaryManagement(Dictionary d) {
@@ -229,21 +228,31 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public ObservableList<String> listTarget(String target) {
-        int size = listWord.size();
+        int size = wordList.size();
         ObservableList<String> listTarget = FXCollections.observableArrayList();
 
         if (target.isEmpty()) {
             for (int i=0; i< size; i++) {
-                listTarget.add(listWord.get(i).getWordTarget());
+                listTarget.add(wordList.get(i).getWordTarget());
             }
         } else {
             for (int i = 0;i < size;i++) {
-                if (listWord.get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
-                    listTarget.add(listWord.get(i).getWordTarget());
+                if (wordList.get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
+                    listTarget.add(wordList.get(i).getWordTarget());
                 }
             }
         }
         return listTarget;
+    }
+
+    public static int checkTypeOfLine(String line) {
+        int count = 0;
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == '/') {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static void InsertFromFile(String path) {
@@ -275,7 +284,7 @@ public class DictionaryManagement extends Dictionary {
                             explain += "-" + text + "\n";
                         }
                     }
-                    listWord.add(new Word(target, explain, spellings, wordClass));
+                    wordList.add(new Word(target, explain, spellings, wordClass));
 
 
                 } else if (checkTypeOfLine(line) == MULTIPLE_SPELLINGS) {
@@ -300,7 +309,7 @@ public class DictionaryManagement extends Dictionary {
                             explain +=  text + "\n";
                         }
                     }
-                    listWord.add(new Word(target, explain, spellings, wordClass));
+                    wordList.add(new Word(target, explain, spellings, wordClass));
                 }
             }
             scanner.close();
@@ -310,14 +319,6 @@ public class DictionaryManagement extends Dictionary {
         }
     }
 
-    public Word searchWord(String word) {
-        for (int i = 0; i < listWord.size(); i++) {
-            if (word.toLowerCase().equals(listWord.get(i).getWordTarget().toLowerCase())) {
-                return listWord.get(i);
-            }
-        }
-        return null;
-    }
 }
 
 

@@ -51,7 +51,7 @@ public class WordController implements Initializable {
     public void wordLookUp(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
-            Word word = new DictionaryManagement(this.dictionaryData).searchWord(wordLook);
+            Word word = new DictionaryManagement(this.dictionaryData).getWord(wordLook);
             if (word.getWordSpelling().contains(";")) {
                 StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
                 String firstSpelling = wordText.nextToken().trim();
@@ -73,7 +73,7 @@ public class WordController implements Initializable {
             String inputMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
             inputSearch.setText(inputMouseSetText);
             String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
-            Word word = new DictionaryManagement(this.dictionaryData).searchWord(wordMeaningMouseSetText);
+            Word word = new DictionaryManagement(this.dictionaryData).getWord(wordMeaningMouseSetText);
             if (word.getWordSpelling().contains(";")) {
                 StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
                 String firstSpelling = wordText.nextToken();
@@ -95,6 +95,6 @@ public class WordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DictionaryManagement.InsertFromFile("resource/dictionaries/dict.txt");
+        DictionaryManagement.InsertFromFile("resource/dictionaries/dictionaries.txt");
     }
 }
