@@ -1,12 +1,17 @@
 package test;
 
 import cmd.Dictionary;
+import cmd.Word;
+import cmd.DictionaryManagement;
+import cmd.DictionaryCommandline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+
 
 public class AdvManagement {
     private static int SINGLE_SPELLINGS = 2;
@@ -95,7 +100,9 @@ public class AdvManagement {
     }
 
     public static void main(String[] args) {
+
         String line ="abranchiate\t/ə'bræɳkiəl/ (abranchiate)\t/ə'bræɳkiit/\t*  tính từ\t- (động vật học) không mang";
+
         if (checkTypeOfLine(line) == SINGLE_SPELLINGS) {
             StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
             String target = stringTokenizer.nextToken().trim();
@@ -150,5 +157,8 @@ public class AdvManagement {
         }
 
 
+
+
     }
 }
+

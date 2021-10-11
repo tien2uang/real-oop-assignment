@@ -13,10 +13,12 @@ import java.util.*;
 
 import java.io.*;
 
-public class DictionaryManagement {
+public class DictionaryManagement extends Dictionary {
     private Dictionary dictionaryData;
-    public static ArrayList<Word> listWord = new ArrayList<>();
+    private static int SINGLE_SPELLINGS = 2;
+    private static int MULTIPLE_SPELLINGS = 4;
     public static List<String> listWordTarget = new ArrayList<>();
+    public static ArrayList<Word> listWord = new ArrayList<>();
 
 
     public DictionaryManagement(Dictionary d) {
@@ -98,14 +100,6 @@ public class DictionaryManagement {
         return this.dictionaryData.getWord(wordTarget);
     }
 
-    public String lookWordMeaning(String wordTarget) {
-        for (int i = 0; i < listWord.size(); i++) {
-            if (listWord.get(i).getWordTarget().toLowerCase().equals(wordTarget.toLowerCase())) {
-                return listWord.get(i).getWordExplain();
-            }
-        }
-        return "";
-    }
 
     public void showAllWords() {
         /**
@@ -252,21 +246,77 @@ public class DictionaryManagement {
         return listTarget;
     }
 
-    public static void InsertFromFile() throws IOException {
+    public static void InsertFromFile(String path) {
         try {
-            Scanner input = new Scanner(new File("src/Database/Dictionaries.txt"));
-            while (input.hasNext()) {
-                String word = input.nextLine();
-                String word_mean = input.nextLine();
-                listWord.add(new Word(word, word_mean));
+            Scanner scanner = new Scanner(new File(path));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (checkTypeOfLine(line) == SINGLE_SPELLINGS) {
+                    StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
+                    String target = stringTokenizer.nextToken().trim();
+                    String spellings = "/" + stringTokenizer.nextToken() + "/";
+                    String temp = stringTokenizer.nextToken().trim();
+                    stringTokenizer = new StringTokenizer(temp, "*");
+                    String temp1 = stringTokenizer.nextToken();
+                    stringTokenizer = new StringTokenizer(temp1, "-");
+                    String wordClass = "*  " + stringTokenizer.nextToken().trim();
+                    String explain = "";
+                    while (stringTokenizer.hasMoreTokens()) {
+                        String text = stringTokenizer.nextToken();
+                        if (text.contains("=")) {
+                            StringTokenizer tempStringTokenizer = new StringTokenizer(text, "=");
+                            explain += "-" + tempStringTokenizer.nextToken() + "\n";
+                            while (tempStringTokenizer.hasMoreTokens()) {
+                                String similar = tempStringTokenizer.nextToken().trim();
+                                explain += "  = " + similar + "\n";
+
+                            }
+                        } else {
+                            explain += "-" + text + "\n";
+                        }
+                    }
+                    listWord.add(new Word(target, explain, spellings, wordClass));
+
+
+                } else if (checkTypeOfLine(line) == MULTIPLE_SPELLINGS) {
+
+                    StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
+                    String target = stringTokenizer.nextToken().trim();
+                    String firstSpellings = "/" + stringTokenizer.nextToken() + "/";
+                    String tmp=stringTokenizer.nextToken().trim();
+                    String secondSpellings ="/" + stringTokenizer.nextToken() + "/";
+                    String spellings = firstSpellings + " ; " + secondSpellings;
+                    String temp = stringTokenizer.nextToken().trim();
+                    stringTokenizer = new StringTokenizer(temp, "*");
+                    String temp1 = stringTokenizer.nextToken();
+                    stringTokenizer = new StringTokenizer(temp1.trim(), "\t");
+                    String wordClass = "* "+  stringTokenizer.nextToken().trim();
+                    String explain = "";
+                    while (stringTokenizer.hasMoreTokens()) {
+                        String text = stringTokenizer.nextToken();
+                        if (text.contains("=")) {
+                            explain+="  "+text+"\n";
+                        } else {
+                            explain +=  text + "\n";
+                        }
+                    }
+                    listWord.add(new Word(target, explain, spellings, wordClass));
+                }
             }
-            for (int i = 0; i < listWord.size(); i++) {
-                listWordTarget.add(listWord.get(i).getWordTarget());
-            }
-            input.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
+            System.out.println("Khong tim thay file database");
             e.printStackTrace();
         }
+    }
+
+    public Word searchWord(String word) {
+        for (int i = 0; i < listWord.size(); i++) {
+            if (word.toLowerCase().equals(listWord.get(i).getWordTarget().toLowerCase())) {
+                return listWord.get(i);
+            }
+        }
+        return null;
     }
 }
 
