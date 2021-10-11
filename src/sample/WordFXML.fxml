@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -59,7 +60,7 @@
                   <Pane layoutX="14.0" layoutY="20.0" prefHeight="38.0" prefWidth="251.0" style="-fx-background-color: B4B6B5; -fx-background-radius: 7px;">
                      <children>
                         <TextField fx:id="inputSearch" layoutX="8.0" layoutY="3.0" onKeyPressed="#wordLookUp" onKeyReleased="#updateListView" prefHeight="33.0" prefWidth="204.0" promptText="Seach..." style="-fx-background-color: white; -fx-border-color: B4B6B5;" />
-                        <FontAwesomeIconView fill="#c500d7" glyphName="SEARCH" layoutX="222.0" layoutY="24.0" size="18" />
+                        <FontAwesomeIconView glyphName="SEARCH" layoutX="222.0" layoutY="24.0" size="18" />
                      </children>
                   </Pane>
                   <ListView fx:id="wordListSearch" layoutX="14.0" layoutY="69.0" onMouseClicked="#clickWord" prefHeight="308.0" prefWidth="251.0" styleClass="listview" stylesheets="@../css/class.css" />
@@ -67,29 +68,35 @@
             </Pane>
             <Pane layoutX="320.0" layoutY="26.0" prefHeight="386.0" prefWidth="390.0">
                <children>
-                  <Label fx:id="wordClass" layoutX="14.0" layoutY="62.0" prefHeight="33.0" prefWidth="360.0">
+                  <Label fx:id="wordClass" layoutX="15.0" layoutY="59.0" prefHeight="33.0" prefWidth="360.0">
                      <font>
                         <Font name="Segoe UI Semilight Italic" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="wordSpellings" layoutX="14.0" layoutY="92.0" prefHeight="33.0" prefWidth="368.0">
+                  <Label fx:id="wordSpellings" layoutX="53.0" layoutY="92.0" prefHeight="33.0" prefWidth="334.0">
                      <font>
                         <Font name="Segoe UI Semibold" size="17.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="wordMeaning" layoutY="177.0" prefHeight="212.0" prefWidth="390.0" wrapText="true">
-                     <font>
-                        <Font name="System Bold Italic" size="15.0" />
-                     </font>
-                  </TextArea>
                   <Label fx:id="wordTarget" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="368.0" textFill="#2d1eb9">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="wordSecondSpellings" layoutX="14.0" layoutY="129.0" prefHeight="33.0" prefWidth="368.0">
+                  <Label fx:id="wordSecondSpellings" layoutX="265.0" layoutY="92.0" prefHeight="33.0" prefWidth="125.0">
                      <font>
                         <Font name="Segoe UI Semibold" size="17.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="wordMeaning" focusColor="#405aa800" layoutX="15.0" layoutY="151.0" prefHeight="235.0" prefWidth="374.0" styleClass="textarea" stylesheets="@../css/class.css" unFocusColor="#4d4d4d00" />
+                  <Button fx:id="speakingButton" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="26.0" styleClass="button3" stylesheets="@../css/class.css">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="VOLUME_UP" />
+                     </graphic>
+                  </Button>
+                  <Label fx:id="definitions" layoutX="15.0" layoutY="125.0" prefHeight="27.0" prefWidth="118.0" text="DEFINITIONS" textFill="#6b0c34">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children>

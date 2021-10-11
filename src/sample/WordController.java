@@ -2,12 +2,10 @@ package sample;
 
 import cmd.Dictionary;
 import cmd.Word;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import cmd.DictionaryManagement;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,7 +27,7 @@ public class WordController implements Initializable {
     public ListView<String> wordListSearch;
 
     @FXML
-    public TextArea wordMeaning;
+    public JFXTextArea wordMeaning;
 
     @FXML
     public Label wordTarget;
@@ -42,7 +40,10 @@ public class WordController implements Initializable {
 
     @FXML
     public Label wordSecondSpellings;
-
+    @FXML
+    private Label definitions;
+    @FXML
+    private Button speakingButton;
     public void updateListView() {
         String word = inputSearch.getText();
         wordListSearch.setItems((new DictionaryManagement(this.dictionaryData)).listTarget(word));
@@ -52,16 +53,18 @@ public class WordController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
             Word word = new DictionaryManagement(this.dictionaryData).getWord(wordLook);
-            if (word.getWordSpelling().contains(";")) {
-                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
-                String firstSpelling = wordText.nextToken().trim();
-                String secondSpelling = wordText.nextToken().trim();
-                wordSpellings.setText(firstSpelling);
-                wordSecondSpellings.setText(secondSpelling);
-            } else {
-                wordSpellings.setText(word.getWordSpelling());
-                wordSecondSpellings.setText("");
-            }
+//            if (word.getWordSpelling().contains(";")) {
+//                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
+//                String firstSpelling = wordText.nextToken().trim();
+//                String secondSpelling = wordText.nextToken().trim();
+//                wordSpellings.setText(firstSpelling);
+//                wordSecondSpellings.setText(secondSpelling);
+//                wordSpellings.setText(word.getWordSpelling());
+//            } else {
+//                wordSpellings.setText(word.getWordSpelling());
+//                wordSecondSpellings.setText("");
+//            }
+            wordSpellings.setText(word.getWordSpelling());
             wordTarget.setText(word.getWordTarget());
             wordClass.setText(word.getWordClass());
             wordMeaning.setText(word.getWordExplain());
@@ -84,6 +87,9 @@ public class WordController implements Initializable {
                 wordSpellings.setText(word.getWordSpelling());
                 wordSecondSpellings.setText("");
             }
+            speakingButton.setVisible(true);
+            definitions.setVisible(true);
+            speakingButton.setDisable(false);
             wordTarget.setText(word.getWordTarget());
             wordClass.setText(word.getWordClass());
             wordMeaning.setText(word.getWordExplain());
@@ -95,6 +101,9 @@ public class WordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        speakingButton.setVisible(false);
+        speakingButton.setDisable(true);
+        definitions.setVisible(false);
         DictionaryManagement.InsertFromFile("resource/dictionaries/dictionaries.txt");
     }
 }

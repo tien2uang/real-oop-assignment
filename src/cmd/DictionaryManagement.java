@@ -259,14 +259,14 @@ public class DictionaryManagement extends Dictionary {
         try {
             Scanner scanner = new Scanner(new File(path));
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+                String line = scanner.nextLine().trim();
                 if (checkTypeOfLine(line) == SINGLE_SPELLINGS) {
                     StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
                     String target = stringTokenizer.nextToken().trim();
-                    String spellings = "/" + stringTokenizer.nextToken() + "/";
+                    String spellings = "/" + stringTokenizer.nextToken().trim() + "/";
                     String temp = stringTokenizer.nextToken().trim();
                     stringTokenizer = new StringTokenizer(temp, "*");
-                    String temp1 = stringTokenizer.nextToken();
+                    String temp1 = stringTokenizer.nextToken().trim();
                     stringTokenizer = new StringTokenizer(temp1, "-");
                     String wordClass = "*  " + stringTokenizer.nextToken().trim();
                     String explain = "";
@@ -294,7 +294,7 @@ public class DictionaryManagement extends Dictionary {
                     String firstSpellings = "/" + stringTokenizer.nextToken() + "/";
                     String tmp=stringTokenizer.nextToken().trim();
                     String secondSpellings ="/" + stringTokenizer.nextToken() + "/";
-                    String spellings = firstSpellings + " ; " + secondSpellings;
+                    String spellings = firstSpellings + " , " + secondSpellings;
                     String temp = stringTokenizer.nextToken().trim();
                     stringTokenizer = new StringTokenizer(temp, "*");
                     String temp1 = stringTokenizer.nextToken();
