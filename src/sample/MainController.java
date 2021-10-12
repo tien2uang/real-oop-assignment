@@ -27,6 +27,7 @@ public class MainController {
     private ResourceBundle resourceBundle;
     private AnchorPane textAnchorPane = null;
     private AnchorPane wordAnchorPane = null;
+    private AnchorPane advancedAnchorPane=null;
     private AnchorPane currentPane=null;
     @FXML
     private BorderPane mainBorderPane;
@@ -34,6 +35,8 @@ public class MainController {
     private Button text_button;
     @FXML
     private Button word_button;
+    @FXML
+    private Button advanced_button;
     @FXML
     private Button quit_button;
 
@@ -44,6 +47,9 @@ public class MainController {
 
         //  new FadeIn(textAnchorPane).setSpeed(2).play();
 
+    }
+    private  void showAdvancedAnchorPane(){
+        this.mainBorderPane.setCenter(advancedAnchorPane);
     }
 
     private void showWordAnchorPane() {
@@ -60,6 +66,10 @@ public class MainController {
         } else if (actionEvent.getSource() == text_button) {
 
             this.showTextAnchorPane();
+        }
+        else if (actionEvent.getSource() == advanced_button) {
+
+            this.showAdvancedAnchorPane();
         }
         else if(actionEvent.getSource()==quit_button){
             Stage stage= (Stage) mainBorderPane.getScene().getWindow();
@@ -85,6 +95,14 @@ public class MainController {
         } catch (IOException e) {
             System.out.println("Khong tim thay file WordFXML");
         }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("AdvancedFXML.fxml"));
+            advancedAnchorPane = (AnchorPane) fxmlLoader.load();
+        } catch (IOException e) {
+            System.out.println("Khong tim thay file AdvancedFXML");
+        }
+
 
         this.showWordAnchorPane();
 

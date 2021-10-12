@@ -69,7 +69,7 @@
                   <MaterialDesignIconView fill="#00b7ff" glyphName="TWITCH" size="25" />
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="184.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="225.0" styleClass="button1" stylesheets="@../css/class.css" text="Advanced" textFill="WHITE">
+            <Button fx:id="advanced_button" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="184.0" mnemonicParsing="false" onAction="#click" prefHeight="53.0" prefWidth="225.0" styleClass="button1" stylesheets="@../css/class.css" text="Advanced" textFill="WHITE">
                <padding>
                   <Insets left="23.0" />
                </padding>
