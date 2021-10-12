@@ -34,7 +34,7 @@
 }
 .listview
 {
- -fx-border-color: #e5e9ec;
+ -fx-border-color: #f5f2f2;
  -fx-background-color: none;
 
 }
@@ -48,6 +48,28 @@
 }
 
 .listview .scroll-bar .thumb
+{
+-fx-background-color: rgba(0, 0, 0, .2);
+    -fx-background-radius: 1000;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+}
+.listview1
+{
+ -fx-border-color: #e5e9ec;
+ -fx-background-color:  #EDEFF3;
+
+}
+.listview1 .increment-button, .listview .decrement-button
+{
+
+}
+.listview1 .scroll-bar:vertical
+{
+-fx-background-color:transparent;
+}
+
+.listview1 .scroll-bar .thumb
 {
 -fx-background-color: rgba(0, 0, 0, .2);
     -fx-background-radius: 1000;
