@@ -14,14 +14,34 @@ import java.util.*;
 import java.io.*;
 
 public class DictionaryManagement extends Dictionary {
-    private Dictionary dictionaryData;
+    private  Dictionary dictionaryData;
     private static int SINGLE_SPELLINGS = 2;
     private static int MULTIPLE_SPELLINGS = 4;
     private static List<String> listWordTarget = new ArrayList<>();
+    private static ObservableList<Word> historyList=FXCollections.observableArrayList();
 
 
     public DictionaryManagement(Dictionary d) {
         this.dictionaryData = d;
+    }
+
+    public static ObservableList<Word> getHistoryList() {
+        return historyList;
+    }
+
+    public void insertHistory(Word word){
+        if(historyList.size()==0){
+            historyList.add(word);
+        }
+        else {
+            historyList.add(0,word);
+        }
+    }
+    public void removeHistory(String target){
+       Word word= dictionaryLookUp(target);
+        if (historyList.size()>0) {
+            historyList.remove(word);
+        }
     }
 
     public void insertFromCommandLine() {
