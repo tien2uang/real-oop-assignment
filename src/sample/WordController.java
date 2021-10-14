@@ -86,6 +86,7 @@ public class WordController implements Initializable {
                 inputSearch.setText(inputMouseSetText);
                 String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
                 Word word = new DictionaryManagement(this.dictionaryData).getWord(wordMeaningMouseSetText);
+                (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
                 if (word.getWordSpelling().contains(";")) {
                     StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
                     String firstSpelling = wordText.nextToken();
@@ -120,6 +121,7 @@ public class WordController implements Initializable {
         speakingButton.setVisible(false);
         speakingButton.setDisable(true);
         definitions.setVisible(false);
+        dictionaryData= new Dictionary();
         DictionaryManagement.InsertFromFile("resource/dictionaries/dict.txt");
     }
 }

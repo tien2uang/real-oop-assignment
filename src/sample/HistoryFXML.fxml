@@ -6,15 +6,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="hBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Label">
+      <Label fx:id="targetLabel">
          <font>
             <Font size="22.0" />
          </font>
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
       </Label>
-      <Label layoutX="10.0" layoutY="25.0" text="Label">
+      <Label fx:id="spellingLabel" layoutX="10.0" layoutY="25.0">
          <font>
             <Font size="22.0" />
          </font>
@@ -22,7 +24,7 @@
             <Insets left="120.0" />
          </HBox.margin>
       </Label>
-      <Button mnemonicParsing="false" text="Button">
+      <Button fx:id="btn1" mnemonicParsing="false" onAction="#click" text="Details">
          <HBox.margin>
             <Insets left="90.0" />
          </HBox.margin>
