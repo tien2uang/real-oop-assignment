@@ -41,9 +41,6 @@ public class AdvancedController {
                         nodeArrayList.add((HBox) fxmlLoader.load());
 
                         historyVBox.getChildren().add(nodeArrayList.get(i));
-
-//                     HistoryController historyController =(HistoryController) fxmlLoader.getController();
-            //            historyController.getTargetLabel().setText("abc");
                         if(historyController==null){
                             System.out.println("control null");
                         }

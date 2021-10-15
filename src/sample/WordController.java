@@ -61,6 +61,7 @@ public class WordController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
             Word word = new DictionaryManagement(this.dictionaryData).getWord(wordLook);
+            (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
 //            if (word.getWordSpelling().contains(";")) {
 //                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
 //                String firstSpelling = wordText.nextToken().trim();

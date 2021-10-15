@@ -112,3 +112,8 @@
 
 
 }
+.historyPane
+{
+-fx-background-color:#ffffff;
+-fx-background-radius:30px;
+}

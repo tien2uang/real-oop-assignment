@@ -9,20 +9,29 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.net.URL;
-
 public class Main extends Application {
+    private double x, y;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
-        Parent root = FXMLLoader.load(getClass().getResource("testit.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        HistoryController.mStage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");
-        Scene scene=new Scene(root);
+        Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         new ZoomIn(root).setSpeed(0.8).play();
+        root.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+
+            primaryStage.setX(event.getScreenX() - x);
+            primaryStage.setY(event.getScreenY() - y);
+
+        });
         primaryStage.show();
     }
 

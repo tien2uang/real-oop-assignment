@@ -111,9 +111,9 @@
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="79.0" text="History" />
                         <Line endX="7.0" layoutX="115.0" layoutY="44.0" startX="-100.0" />
-                        <ScrollPane layoutX="23.0" layoutY="75.0" prefHeight="333.0" prefWidth="684.0">
+                        <ScrollPane layoutX="6.0" layoutY="62.0" prefHeight="350.0" prefWidth="717.0" stylesheets="@../css/scrollpane.css">
                            <content>
-                              <VBox fx:id="historyVBox" prefHeight="332.0" prefWidth="683.0" />
+                              <VBox fx:id="historyVBox" prefHeight="347.0" prefWidth="692.0" />
                            </content>
                         </ScrollPane>
                      </children></AnchorPane>
