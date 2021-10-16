@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class AddAndDelete extends Dictionary implements Initializable {
+public class AddAndDelete  implements Initializable {
     Dictionary dictionary;
     @FXML
     private JFXTextField addWordTarget;
@@ -58,7 +58,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
     private Label message;
 
     public boolean isExisting(String wordTarget) {
-        Word word = new DictionaryManagement(this.dictionary).getWord2(wordTarget);
+        Word word = (new Dictionary()).getWord2(wordTarget);
         return (word != null) && (word.getWordTarget().compareToIgnoreCase(wordTarget) == 0);
     }
 
@@ -76,7 +76,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
                 String wordNewClass = addWordClass.getText();
                 String spellings = addWordSpelling.getText();
                 String explain = addWordMeaning.getText();
-                wordList.add(new Word(target, explain, spellings, wordNewClass));
+                (new Dictionary()).addWord(new Word(target, explain, spellings, wordNewClass));//can than
                 message.setText("Successfully! You have just added '" + addWordTarget.getText() + "' to the list.");
                 addWordTarget.clear();
                 addWordSpelling.clear();
@@ -117,7 +117,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
     public void clickToChooseDeleteWord(MouseEvent event) {
         try {
             String inputMouseToDelete = listDeleteWord.getSelectionModel().getSelectedItem().toString();
-            if(inputMouseToDelete != "No result") {
+            if(!inputMouseToDelete.equals("No result")) {
                 deleteWord.setText(inputMouseToDelete);
             }
         } catch (NullPointerException e) {

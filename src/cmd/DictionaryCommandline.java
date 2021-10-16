@@ -9,7 +9,7 @@ public class DictionaryCommandline {
         Scanner input = new Scanner(System.in);
         System.out.println("Loading dictionaryData from dictionaries.txt");
         DictionaryManagement start = new DictionaryManagement(this.dictionary);
-        start.insertFromFile("dictionaries.txt");
+        start.insertFromFile("resource/dictionaries/dictionaries.txt");
         while(true) {
             int option;
             System.out.println("Type in option you want(1-addWord, 2-removeWord, 3-editWord, 4-searchWord, 5-exportToFile, 6-showWord): ");
@@ -57,6 +57,12 @@ public class DictionaryCommandline {
 
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        DictionaryCommandline dictionaryCommandline= new DictionaryCommandline();
+        dictionaryCommandline.dictionaryAdvanced();
     }
 
 }

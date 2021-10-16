@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class HistoryController {
     @FXML
@@ -30,10 +29,11 @@ public class HistoryController {
     private Label classLabel;
     private Word word;
     public static Stage mStage;
-    private double x,y;
+    private double x, y;
+
     public void click(ActionEvent actionEvent) {
         if (actionEvent.getSource() == detailButton) {
-            Parent root = null;
+            Parent root;
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("HistoryWordDetail.fxml"));
@@ -48,8 +48,8 @@ public class HistoryController {
                 stage.initStyle(StageStyle.TRANSPARENT);
 
                 stage.setResizable(false);
-                stage.setX(mStage.getX()+400);
-                stage.setY(mStage.getY()+150);
+                stage.setX(mStage.getX() + 400);
+                stage.setY(mStage.getY() + 150);
 
                 new ZoomIn(root).setSpeed(1.5).play();
                 root.setOnMousePressed(event -> {

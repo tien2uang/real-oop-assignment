@@ -1,32 +1,22 @@
 package sample;
 
-import cmd.Dictionary;
 import cmd.DictionaryManagement;
 import cmd.Word;
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Tab;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class AdvancedController {
     //history fields
     @FXML
     private VBox historyVBox;
-    @FXML
-    private HBox history = null;
+
 
     //history methods
 
@@ -35,7 +25,6 @@ public class AdvancedController {
 
     @FXML
     private AnchorPane addAndDelete;
-
 
 
     @FXML
@@ -62,15 +51,10 @@ public class AdvancedController {
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(getClass().getResource("HistoryFXML.fxml"));
-
                         HistoryController historyController = new HistoryController();
                         fxmlLoader.setController(historyController);
-                        nodeArrayList.add((HBox) fxmlLoader.load());
-
+                        nodeArrayList.add(fxmlLoader.load());
                         historyVBox.getChildren().add(nodeArrayList.get(i));
-                        if(historyController==null){
-                            System.out.println("control null");
-                        }
                         historyController.setHistory(DictionaryManagement.getHistoryList().get(i));
                         System.out.println(DictionaryManagement.getHistoryList().get(i).getWordTarget());
                     } catch (Exception e) {

@@ -1,6 +1,8 @@
 package sample;
 
 import animatefx.animation.ZoomIn;
+import cmd.Dictionary;
+import cmd.DictionaryManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         HistoryController.mStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");
@@ -37,6 +40,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        Dictionary dictionary = new Dictionary();
+        DictionaryManagement dictionaryManagement = new DictionaryManagement(dictionary);
+        DictionaryManagement.InsertFromFile("resource/dictionaries/dict.txt");
         launch(args);
     }
 }
