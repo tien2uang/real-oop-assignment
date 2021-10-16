@@ -221,6 +221,14 @@ public class DictionaryManagement extends Dictionary {
 
     }
 
+    public void removeWord(String wordTarget) {
+        for (int i = 0; i < wordList.size(); i++) {
+            if (wordList.get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                wordList.remove(i);
+            }
+        }
+    }
+
     public void dictionarySearcher(String wordSearch) {
 
         ArrayList<Word> words = this.dictionaryData.searcher(wordSearch);
