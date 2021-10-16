@@ -1,6 +1,6 @@
 package sample;
 
-import Translate.Translate;
+import Translate.*;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class TextController {
 
+    @FXML
+    private Button firstSpeakButton;
     @FXML
     private JFXTextArea inputText;
     @FXML
@@ -66,6 +68,16 @@ public class TextController {
             outputText.setText(tempText);
         }
 
+    }
+    @FXML
+    private  void speak(ActionEvent actionEvent){
+        if(actionEvent.getSource()==firstSpeakButton){
+            try {
+                GoogleTTS.speak(firstLanguage.getText().substring(0, 2).toLowerCase(),inputText.getText().trim());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

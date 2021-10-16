@@ -63,7 +63,7 @@
                         <FontAwesomeIconView glyphName="SEARCH" layoutX="222.0" layoutY="24.0" size="18" />
                      </children>
                   </Pane>
-                  <ListView fx:id="wordListSearch" layoutX="14.0" layoutY="69.0" onMouseClicked="#clickWord" prefHeight="308.0" prefWidth="251.0" styleClass="listview" stylesheets="@../css/class.css" />
+                  <ListView fx:id="wordListSearch" layoutX="12.0" layoutY="64.0" onMouseClicked="#clickWord" opacity="0.85" prefHeight="308.0" prefWidth="251.0" styleClass="listview" stylesheets="@../css/class.css" />
                </children>
             </Pane>
             <Pane layoutX="320.0" layoutY="26.0" prefHeight="386.0" prefWidth="390.0">

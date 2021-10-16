@@ -143,6 +143,7 @@ public class AddAndDelete  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dictionary =new Dictionary();
         RequiredFieldValidator targetValidator = new RequiredFieldValidator();
         RequiredFieldValidator classValidator = new RequiredFieldValidator();
         RequiredFieldValidator spellingValidator = new RequiredFieldValidator();
