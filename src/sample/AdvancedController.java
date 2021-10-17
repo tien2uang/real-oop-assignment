@@ -26,6 +26,13 @@ public class AdvancedController {
     @FXML
     private AnchorPane addAndDelete;
 
+    @FXML
+    private AnchorPane editWord;
+
+    @FXML
+    private AnchorPane editWordMain;
+
+
 
     @FXML
     public void initialize() {
@@ -39,6 +46,17 @@ public class AdvancedController {
             this.addAndDeleteMain.getChildren().setAll(addAndDelete);
         } catch (IOException e) {
             System.out.println("Không tim thay file AddAndDelete.");
+        }
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("EditWord.fxml"));
+            editWord = fxmlLoader.load();
+            EditWord editWord_ = new EditWord();
+            fxmlLoader.setController(editWord_);
+            this.editWordMain.getChildren().setAll(editWord);
+        } catch (IOException e) {
+            System.out.println("Không tim thay file EditWord.fxml");
         }
 
         // History
