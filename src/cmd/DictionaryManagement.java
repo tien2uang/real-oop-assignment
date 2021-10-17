@@ -23,6 +23,10 @@ public class DictionaryManagement {
         dictionaryData = d;
     }
 
+    public static Dictionary getDictionary() {
+        return dictionaryData;
+    }
+
     public static ObservableList<Word> getHistoryList() {
         return historyList;
     }
