@@ -13,22 +13,22 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="724.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddAndDelete">
    <children>
-      <JFXTextField fx:id="addWordTarget" focusColor="#efa1b3" layoutX="21.0" layoutY="39.0" prefHeight="39.0" prefWidth="304.0" promptText="Add a word" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
+      <JFXTextField fx:id="addWordTarget" focusColor="#efa1b3" layoutX="22.0" layoutY="49.0" onMouseClicked="#checkAction" prefHeight="39.0" prefWidth="304.0" promptText="Add a word" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="addWordClass" focusColor="#efa1b3" layoutX="21.0" layoutY="116.0" prefHeight="39.0" prefWidth="137.0" promptText="Word Class" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
+      <JFXTextField fx:id="addWordClass" focusColor="#efa1b3" layoutX="21.0" layoutY="116.0" onMouseClicked="#checkAction" prefHeight="39.0" prefWidth="137.0" promptText="Word Class" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="addWordSpelling" focusColor="#efa1b3" layoutX="174.0" layoutY="116.0" prefHeight="39.0" prefWidth="147.0" promptText="Spelling" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
+      <JFXTextField fx:id="addWordSpelling" focusColor="#efa1b3" layoutX="174.0" layoutY="116.0" onMouseClicked="#checkAction" prefHeight="39.0" prefWidth="147.0" promptText="Spelling" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextArea fx:id="addWordMeaning" focusColor="#efa1b3" layoutX="19.0" layoutY="177.0" prefHeight="113.0" prefWidth="304.0" promptText="Explaination" unFocusColor="#bec1c0">
+      <JFXTextArea fx:id="addWordMeaning" focusColor="#efa1b3" layoutX="19.0" layoutY="177.0" onMouseClicked="#checkAction" prefHeight="113.0" prefWidth="304.0" promptText="Explaination" unFocusColor="#bec1c0">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
@@ -41,14 +41,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <JFXTextField fx:id="deleteWord" focusColor="#efa1b3" layoutX="406.0" layoutY="39.0" onKeyPressed="#enterDelete" onKeyReleased="#listViewDeleteWord" prefHeight="39.0" prefWidth="213.0" promptText="Delete a word" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
+      <JFXTextField fx:id="deleteWord" focusColor="#efa1b3" layoutX="408.0" layoutY="49.0" onKeyPressed="#enterDelete" onKeyReleased="#listViewDeleteWord" onMouseClicked="#checkAction" prefHeight="39.0" prefWidth="213.0" promptText="Delete a word" style="-fx-border-width: 0px; -fx-background-color: white;" unFocusColor="#bec1c0">
          <font>
             <Font name="Segoe UI Semilight" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXCheckBox fx:id="check" checkedColor="#efa1b3" layoutX="18.0" layoutY="316.0" prefHeight="21.0" prefWidth="129.0" text="Bạn nghĩ kĩ chưa?" />
-      <ListView fx:id="listDeleteWord" layoutX="406.0" layoutY="88.0" onMouseClicked="#clickToChooseDeleteWord" prefHeight="287.0" prefWidth="213.0" styleClass="listview" stylesheets="@../css/class.css" />
-      <Button fx:id="delete" layoutX="631.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#clickToDelete" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-border-color: #609BEB;" text="Delete">
+      <JFXCheckBox fx:id="check" checkedColor="#efa1b3" layoutX="18.0" layoutY="316.0" onMouseClicked="#checkAction" prefHeight="21.0" prefWidth="129.0" text="Bạn nghĩ kĩ chưa?" />
+      <ListView fx:id="listDeleteWord" layoutX="408.0" layoutY="98.0" onMouseClicked="#clickToChooseDeleteWord" prefHeight="287.0" prefWidth="213.0" styleClass="listview" stylesheets="@../css/class.css" />
+      <Button fx:id="delete" layoutX="631.0" layoutY="49.0" mnemonicParsing="false" onMouseClicked="#clickToDelete" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-border-color: #609BEB;" text="Delete">
          <font>
             <Font name="Segoe UI Semilight" size="15.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="message" alignment="BASELINE_CENTER" layoutX="111.0" layoutY="368.0" prefHeight="31.0" prefWidth="243.0" textFill="#943e3e" wrapText="true" />
-      <Line endX="-100.0" endY="346.0" layoutX="463.0" layoutY="43.0" startX="-100.0" startY="-4.0" stroke="#dacece" strokeWidth="0.5" />
+      <Label fx:id="message" layoutX="21.0" layoutY="14.0" prefHeight="31.0" prefWidth="399.0" textFill="#2ed758" wrapText="true" />
+      <Line endX="-100.0" endY="341.0" layoutX="463.0" layoutY="43.0" startX="-100.0" startY="12.0" stroke="#dacece" strokeWidth="0.5" />
    </children>
 </AnchorPane>
