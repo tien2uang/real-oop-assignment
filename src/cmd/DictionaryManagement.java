@@ -1,7 +1,6 @@
 package cmd;
 
 
-import com.sun.org.apache.xml.internal.utils.StringToStringTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,35 +10,34 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.*;
 
-import java.io.*;
 
-public class DictionaryManagement extends Dictionary {
-    private  Dictionary dictionaryData;
-    private static int SINGLE_SPELLINGS = 2;
-    private static int MULTIPLE_SPELLINGS = 4;
-    private static List<String> listWordTarget = new ArrayList<>();
-    private static ObservableList<Word> historyList=FXCollections.observableArrayList();
+public class DictionaryManagement {
+    private static Dictionary dictionaryData;
+    private final static int SINGLE_SPELLINGS = 2;
+    private final static int MULTIPLE_SPELLINGS = 4;
+    private static final List<String> listWordTarget = new ArrayList<>();
+    private static final ObservableList<Word> historyList = FXCollections.observableArrayList();
 
 
     public DictionaryManagement(Dictionary d) {
-        this.dictionaryData = d;
+        dictionaryData = d;
     }
 
     public static ObservableList<Word> getHistoryList() {
         return historyList;
     }
 
-    public void insertHistory(Word word){
-        if(historyList.size()==0){
+    public void insertHistory(Word word) {
+        if (historyList.size() == 0) {
             historyList.add(word);
-        }
-        else {
-            historyList.add(0,word);
+        } else {
+            historyList.add(0, word);
         }
     }
-    public void removeHistory(String target){
-       Word word= dictionaryLookUp(target);
-        if (historyList.size()>0) {
+
+    public void removeHistory(String target) {
+        Word word = dictionaryLookUp(target);
+        if (historyList.size() > 0) {
             historyList.remove(word);
         }
     }
@@ -50,7 +48,7 @@ public class DictionaryManagement extends Dictionary {
         for (int i = 0; i < wordCount; i++) {
             String target = input.nextLine();
             String explain = input.nextLine();
-            this.dictionaryData.addWord(new Word(target, explain));
+            dictionaryData.addWord(new Word(target, explain));
         }
     }
 
@@ -64,123 +62,37 @@ public class DictionaryManagement extends Dictionary {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Khong tim thay file database.");
-        } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
-    public static void insertFromFileAdvanced(String directory) {
-        try {
-            Scanner scanner = new Scanner(new File(directory));
-
-            for (int i = 0; i < 20; i++) {
-                String line = scanner.nextLine();
-                StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
-                System.out.println("Number: " + i);
-                while (stringTokenizer.hasMoreTokens()) {
-                    System.out.println(stringTokenizer.nextToken().replaceAll("^\\s+", ""));
-
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Khong tim thay file database.");
-        }
-
-    }
-
-    /**
-     * insert mới.
-     *
-     * @param directory
-     */
-    public void insertFromFilenew(String directory) {
-        try {
-            Scanner scanner = new Scanner(new File(directory));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] words = line.split("/", 2);
-                dictionaryData.addWord(new Word(words[0], words[1]));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Khong tim thay file database.");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
 
     public Dictionary getDictionaryData() {
         return dictionaryData;
     }
 
     /**
-     * @param wordTarget
+     * @param wordTarget target
      * @return trả về null nếu không tìm thấy,còn không trả về Word
      */
     public Word dictionaryLookUp(String wordTarget) {
-        return this.dictionaryData.getWord(wordTarget);
+        return dictionaryData.getWord2(wordTarget);
     }
 
 
     public void showAllWords() {
-        /**
-         for (Word word : dictionaryData.getWordList()) {
-         System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
-         }
-         */
+
+//         for (Word word : dictionaryData.getWordList()) {
+//         System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
+//         }
+
         System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
-        int size = this.dictionaryData.getWordListSize();
+        int size = dictionaryData.getWordListSize();
         for (int i = 0; i < size; i++) {
-            Word word = this.dictionaryData.getWord(i);
+            Word word = dictionaryData.getWord(i);
             String target = word.getWordTarget();
             String explain = word.getWordExplain();
             System.out.printf("%-5d|%-20s|%s%n", (i + 1), target, explain);
         }
-    }
-
-    /**
-     * tách xâu.
-     *
-     * @param explain
-     * @return
-     */
-    public ArrayList tachxau(String explain) {
-        ArrayList<String> word = new ArrayList<>();
-        String[] explain_ = explain.split("/");
-        String[] new_explain = explain_[explain_.length - 1].split("-");
-
-        for (int i = 0; i < explain_.length - 1; i++) {
-            word.add(explain_[i].replace("*", ""));
-        }
-
-        for (int i = 0; i < new_explain.length; i++) {
-            word.add(new_explain[i].replace("*", ""));
-        }
-
-        for (int i = 0; i < word.size(); i++) {
-            word.get(i).replace("*", "");
-        }
-        return word;
-
-    }
-
-    public void showAllWordsnew() {
-        System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
-        int size = this.dictionaryData.getWordListSize();
-        for (int i = 0; i < size; i++) {
-            Word word = this.dictionaryData.getWord(i);
-            String target = word.getWordTarget();
-            String explain = word.getWordExplain();
-
-            ArrayList<String> new_explain = tachxau(explain);
-
-            System.out.println(target);
-            for (int j = 0; j < new_explain.size(); j++) {
-                System.out.println(new_explain.get(j));
-            }
-            System.out.println("===================");
-
-        }
-
     }
 
 
@@ -191,7 +103,7 @@ public class DictionaryManagement extends Dictionary {
         Scanner scanner = new Scanner(System.in);
         String newWordTarget, newWordExplain;
 
-        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size() - 1, wordToEdit);
+        int index = dictionaryData.searchIndexWord(0, dictionaryData.getWordList().size() - 1, wordToEdit);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn thay thế");
         } else {
@@ -201,8 +113,8 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("Enter new meaning: ");
             newWordExplain = scanner.nextLine();
 
-            this.dictionaryData.getWordList().get(index).setWordTarget(newWordTarget);
-            this.dictionaryData.getWordList().get(index).setWordExplain(newWordExplain);
+            dictionaryData.getWordList().get(index).setWordTarget(newWordTarget);
+            dictionaryData.getWordList().get(index).setWordExplain(newWordExplain);
         }
         scanner.close();
     }
@@ -212,28 +124,29 @@ public class DictionaryManagement extends Dictionary {
      */
     public void removeWordInDictionary(String wordToRemove) {
 
-        int index = this.dictionaryData.searchIndexWord(0, this.dictionaryData.getWordList().size() - 1, wordToRemove);
+        int index = dictionaryData.searchIndexWord(0, dictionaryData.getWordList().size() - 1, wordToRemove);
         if (index == -1) {
             System.out.println("không tìm thấy từ muốn xóa");
         } else {
-            this.dictionaryData.getWordList().remove(index);
+            dictionaryData.getWordList().remove(index);
         }
 
     }
 
     public void removeWord(String wordTarget) {
-        for (int i = 0; i < wordList.size(); i++) {
-            if (wordList.get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
-                wordList.remove(i);
+        for (int i = 0; i < dictionaryData.getWordList().size(); i++) {
+            if (dictionaryData.getWordList().get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                dictionaryData.getWordList().remove(i);
             }
         }
+
     }
 
     public Word getWord2(String wordTarget) {
         try {
-            for (int i = 0; i < wordList.size(); i++) {
-                if (wordList.get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
-                    return wordList.get(i);
+            for (int i = 0; i < this.getDictionaryData().getWordList().size(); i++) {
+                if (this.getDictionaryData().getWordList().get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                    return this.getDictionaryData().getWordList().get(i);
                 }
             }
             return null;
@@ -246,7 +159,7 @@ public class DictionaryManagement extends Dictionary {
 
     public void dictionarySearcher(String wordSearch) {
 
-        ArrayList<Word> words = this.dictionaryData.searcher(wordSearch);
+        ArrayList<Word> words = dictionaryData.searcher(wordSearch);
 
         for (Word word : words) {
             System.out.print(word.getWordTarget() + ", ");
@@ -273,17 +186,17 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public ObservableList<String> listTarget(String target) {
-        int size = wordList.size();
+        int size = dictionaryData.getWordListSize();
         ObservableList<String> listTarget = FXCollections.observableArrayList();
 
         if (target.isEmpty()) {
             for (int i = 0; i < size; i++) {
-                listTarget.add(wordList.get(i).getWordTarget());
+                listTarget.add(dictionaryData.getWordList().get(i).getWordTarget());
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (wordList.get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
-                    listTarget.add(wordList.get(i).getWordTarget());
+                if (dictionaryData.getWordList().get(i).getWordTarget().toLowerCase().startsWith(target.toLowerCase())) {
+                    listTarget.add(dictionaryData.getWordList().get(i).getWordTarget());
                 }
             }
         }
@@ -320,22 +233,23 @@ public class DictionaryManagement extends Dictionary {
                     String temp1 = stringTokenizer.nextToken().trim();
                     stringTokenizer = new StringTokenizer(temp1, "-");
                     String wordClass = "*  " + stringTokenizer.nextToken().trim();
-                    String explain = "";
+                    StringBuilder explain = new StringBuilder();
                     while (stringTokenizer.hasMoreTokens()) {
                         String text = stringTokenizer.nextToken();
                         if (text.contains("=")) {
                             StringTokenizer tempStringTokenizer = new StringTokenizer(text, "=");
-                            explain += "-" + tempStringTokenizer.nextToken() + "\n";
+                            explain.append("-").append(tempStringTokenizer.nextToken()).append("\n");
                             while (tempStringTokenizer.hasMoreTokens()) {
                                 String similar = tempStringTokenizer.nextToken().trim();
-                                explain += "  = " + similar + "\n";
+                                explain.append("  = ").append(similar).append("\n");
 
                             }
                         } else {
-                            explain += "-" + text + "\n";
+                            explain.append("-").append(text).append("\n");
                         }
                     }
-                    wordList.add(new Word(target, explain, spellings, wordClass));
+                    //  dictionaryData.getWordList().add(new Word(target, explain, spellings, wordClass));
+                    dictionaryData.addWord(new Word(target, explain.toString(), spellings, wordClass));
 
 
                 } else if (checkTypeOfLine(line) == MULTIPLE_SPELLINGS) {
@@ -351,16 +265,17 @@ public class DictionaryManagement extends Dictionary {
                     String temp1 = stringTokenizer.nextToken();
                     stringTokenizer = new StringTokenizer(temp1.trim(), "\t");
                     String wordClass = "* " + stringTokenizer.nextToken().trim();
-                    String explain = "";
+                    StringBuilder explain = new StringBuilder();
                     while (stringTokenizer.hasMoreTokens()) {
                         String text = stringTokenizer.nextToken();
                         if (text.contains("=")) {
-                            explain += "  " + text + "\n";
+                            explain.append("  ").append(text).append("\n");
                         } else {
-                            explain += text + "\n";
+                            explain.append(text).append("\n");
                         }
                     }
-                    wordList.add(new Word(target, explain, spellings, wordClass));
+                    //dictionaryData.getWordList().add(new Word(target, explain, spellings, wordClass));
+                    dictionaryData.addWord(new Word(target, explain.toString(), spellings, wordClass));
                 } else {
                     continue;
                 }
@@ -371,7 +286,6 @@ public class DictionaryManagement extends Dictionary {
             e.printStackTrace();
         }
     }
-
 }
 
 

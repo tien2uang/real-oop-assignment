@@ -82,7 +82,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" styleClass="button3" stylesheets="@../css/class.css">
+                  <Button fx:id="firstSpeakButton" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#speak" prefHeight="36.0" prefWidth="36.0" styleClass="button3" stylesheets="@../css/class.css">
                      <graphic>
                         <FontAwesomeIconView glyphName="VOLUME_UP" size="25" wrappingWidth="18.928571701049805" />
                      </graphic>

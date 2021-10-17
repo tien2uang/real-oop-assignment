@@ -3,7 +3,7 @@ package cmd;
 import java.util.ArrayList;
 
 public class Dictionary {
-    public static  ArrayList<Word> wordList = new ArrayList<>();
+    private static final ArrayList<Word> wordList = new ArrayList<>();
 
     public boolean addWord(Word word) {
         try {
@@ -62,19 +62,32 @@ public class Dictionary {
         }
     }
 
-
+    public Word getWord2(String wordTarget) {
+        try {
+            for (Word word : wordList) {
+                if (word.getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                    return word;
+                }
+            }
+            return null;
+        } catch (NullPointerException e) {
+            System.out.println("Error!");
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public Word getWord(int i) {
-        return this.wordList.get(i);
+        return wordList.get(i);
     }
 
     /**
      * tìm vị trí của từ tiếng Anh trong wordList.
      *
-     * @param start
-     * @param end
-     * @param target
-     * @return
+     * @param start .
+     * @param end .
+     * @param target .
+     * @return .
      */
     public int searchIndexWord(int start, int end, String target) {
         try {
@@ -104,10 +117,10 @@ public class Dictionary {
     /**
      * tìm vị trí của từ bắt đầu bằng wordSearch.
      *
-     * @param start
-     * @param end
-     * @param target
-     * @return
+     * @param start .
+     * @param end .
+     * @param target .
+     * @return .
      */
     public int StartWithWordSearch(int start, int end, String target) {
         try {
@@ -161,7 +174,7 @@ public class Dictionary {
     }
 
 
-    public ArrayList<Word> getWordList() {
+    public  ArrayList<Word> getWordList() {
         return wordList;
     }
 

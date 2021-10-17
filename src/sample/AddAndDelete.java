@@ -1,4 +1,5 @@
 package sample;
+
 import cmd.Dictionary;
 import cmd.DictionaryManagement;
 import cmd.Word;
@@ -21,11 +22,10 @@ import javafx.scene.input.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
-
 import java.util.ResourceBundle;
 
 
-public class AddAndDelete extends Dictionary implements Initializable {
+public class AddAndDelete implements Initializable {
     Dictionary dictionary;
     @FXML
     private JFXTextField addWordTarget;
@@ -58,7 +58,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
     private Label message;
 
     public boolean isExisting(String wordTarget) {
-        Word word = new DictionaryManagement(this.dictionary).getWord2(wordTarget);
+        Word word = (new Dictionary()).getWord2(wordTarget);
         return (word != null) && (word.getWordTarget().compareToIgnoreCase(wordTarget) == 0);
     }
 
@@ -69,14 +69,27 @@ public class AddAndDelete extends Dictionary implements Initializable {
         String textExplain = addWordMeaning.getText();
         return ((textTarget.isEmpty()) || (textSpelling.isEmpty()) || (textClass.isEmpty()) || (textExplain.isEmpty()));
     }
+
+    public void checkAction(MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == addWordClass
+                || mouseEvent.getSource() == addWordMeaning
+                || mouseEvent.getSource() == addWordSpelling
+                || mouseEvent.getSource() == addWordTarget
+                || mouseEvent.getSource() == check
+                || mouseEvent.getSource() == deleteWord) {
+            message.setVisible(false);
+        }
+    }
+
     public void addWordToList(MouseEvent event) {
-        if (event.getSource() ==  saveAddWord && check.isSelected() && !isEmpty()) {
+        if (event.getSource() == saveAddWord && check.isSelected() && !isEmpty()) {
+            message.setVisible(true);
             if (!isExisting(addWordTarget.getText())) {
                 String target = addWordTarget.getText();
                 String wordNewClass = addWordClass.getText();
                 String spellings = addWordSpelling.getText();
                 String explain = addWordMeaning.getText();
-                wordList.add(new Word(target, explain, spellings, wordNewClass));
+                (new Dictionary()).addWord(new Word(target, explain, spellings, wordNewClass));//can than
                 message.setText("Successfully! You have just added '" + addWordTarget.getText() + "' to the list.");
                 addWordTarget.clear();
                 addWordSpelling.clear();
@@ -87,17 +100,21 @@ public class AddAndDelete extends Dictionary implements Initializable {
                 message.setText("Failed to add '" + addWordTarget.getText() + "' because the word is existing.");
                 addWordClass.clear();
                 addWordSpelling.clear();
+                addWordTarget.clear();
                 addWordMeaning.clear();
             }
         } else if (isEmpty()) {
+            message.setVisible(true);
             message.setText("Any empty space must be filled.");
         } else {
+            message.setVisible(true);
             message.setText("You need to click agreement checkbox for adding word.");
         }
     }
 
     public void enterDelete(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER && (!deleteWord.getText().isEmpty())) {
+            message.setVisible(true);
             if (isExisting(deleteWord.getText())) {
                 new DictionaryManagement(this.dictionary).removeWord(deleteWord.getText());
                 message.setText("Successfully! You have just deleted '" + deleteWord.getText() + "' from the list.");
@@ -105,10 +122,12 @@ public class AddAndDelete extends Dictionary implements Initializable {
             } else {
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
-        } else {
+        } else if (deleteWord.getText().isEmpty()&& event.getCode() == KeyCode.ENTER ) {
             message.setText("You need to type in word you want to delete.");
+            message.setVisible(true);
         }
     }
+
     public void listViewDeleteWord() {
         String word = deleteWord.getText();
         listDeleteWord.setItems((new DictionaryManagement(this.dictionary)).listTarget(word));
@@ -117,7 +136,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
     public void clickToChooseDeleteWord(MouseEvent event) {
         try {
             String inputMouseToDelete = listDeleteWord.getSelectionModel().getSelectedItem().toString();
-            if(inputMouseToDelete != "No result") {
+            if (!inputMouseToDelete.equals("No result")) {
                 deleteWord.setText(inputMouseToDelete);
             }
         } catch (NullPointerException e) {
@@ -127,6 +146,7 @@ public class AddAndDelete extends Dictionary implements Initializable {
 
     public void clickToDelete(MouseEvent event) {
         if (event.getSource() == delete && (!deleteWord.getText().isEmpty())) {
+            message.setVisible(true);
             if (isExisting(deleteWord.getText())) {
                 String deleteText = deleteWord.getText();
                 new DictionaryManagement(this.dictionary).removeWord(deleteText);
@@ -134,15 +154,28 @@ public class AddAndDelete extends Dictionary implements Initializable {
                 message.setText("Successfully! You have just deleted '" + deleteText + "' from the list.");
                 deleteWord.clear();
             } else {
-                message.setText("Failed to delete '" + deleteWord.getText() +  "' because that word doesn't exist.");
+                message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
         } else if (event.getSource() == delete && (deleteWord.getText().isEmpty())) {
+            message.setVisible(true);
             message.setText("You need to type in word you want to delete.");
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        deleteWord.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.equals("")) {
+
+                listDeleteWord.setVisible(true);
+                listDeleteWord.setDisable(false);
+            } else {
+                listDeleteWord.setDisable(true);
+                listDeleteWord.setVisible(false);
+            }
+        });
+        listDeleteWord.setDisable(true);
+        dictionary = new Dictionary();
         RequiredFieldValidator targetValidator = new RequiredFieldValidator();
         RequiredFieldValidator classValidator = new RequiredFieldValidator();
         RequiredFieldValidator spellingValidator = new RequiredFieldValidator();

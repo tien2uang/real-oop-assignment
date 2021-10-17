@@ -1,30 +1,15 @@
 package sample;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import animatefx.animation.FadeIn;
-import animatefx.animation.SlideInLeft;
-import animatefx.animation.SlideInRight;
-import animatefx.animation.SlideOutDown;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class MainController {
-    @FXML
-    private URL location;
-    @FXML
-    private ResourceBundle resourceBundle;
     private AnchorPane textAnchorPane = null;
     private AnchorPane wordAnchorPane = null;
     private AnchorPane advancedAnchorPane=null;

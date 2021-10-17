@@ -34,9 +34,9 @@
 }
 .listview
 {
- -fx-border-color: #f5f2f2;
+ -fx-border-color: #f7f7f7;
  -fx-background-color: none;
-
+-fx-selection-bar:rgb(196,196,196) ;
 }
 .listview .increment-button, .listview .decrement-button
 {
@@ -56,8 +56,9 @@
 }
 .listview1
 {
- -fx-border-color: #e5e9ec;
+ -fx-border-color: #ebf0ec;
  -fx-background-color:  #EDEFF3;
+ -fx-selection-bar:rgb(196,196,196) ;
 
 }
 .listview1 .increment-button, .listview .decrement-button

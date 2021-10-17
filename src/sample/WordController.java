@@ -60,7 +60,7 @@ public class WordController implements Initializable {
     public void wordLookUp(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
-            Word word = new DictionaryManagement(this.dictionaryData).getWord2(wordLook);
+            Word word = new Dictionary().getWord2(wordLook);
             (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
 //            if (word.getWordSpelling().contains(";")) {
 //                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
@@ -82,11 +82,11 @@ public class WordController implements Initializable {
     
     public void clickWord(MouseEvent event) {
         try {
-            String inputMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
-            if(inputMouseSetText!="No result") {
+            String inputMouseSetText = wordListSearch.getSelectionModel().getSelectedItem();
+            if(!inputMouseSetText.equals("No result")) {
                 inputSearch.setText(inputMouseSetText);
-                String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem().toString();
-                Word word = new DictionaryManagement(this.dictionaryData).getWord2(wordMeaningMouseSetText);
+                String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem();
+                Word word = new Dictionary().getWord2(wordMeaningMouseSetText);
                 (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
                 if (word.getWordSpelling().contains(";")) {
                     StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
@@ -123,6 +123,6 @@ public class WordController implements Initializable {
         speakingButton.setDisable(true);
         definitions.setVisible(false);
         dictionaryData= new Dictionary();
-        DictionaryManagement.InsertFromFile("resource/dictionaries/dict.txt");
+
     }
 }
