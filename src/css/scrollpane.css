@@ -1,21 +1,22 @@
 
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-border-color:  #EDEFF3;
+
+    -fx-border-width:0px;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
+    -fx-background-color:white;
 }
 
 .increment-button, .decrement-button {
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-border-color: transparent;
 }
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
 }
@@ -27,5 +28,5 @@
 }
 
 .scroll-pane > .corner {
-    -fx-background-color:  #EDEFF3;
+    -fx-background-color:  white;
 }

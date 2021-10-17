@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -105,7 +106,7 @@ public class AddAndDelete  implements Initializable {
             } else {
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
-        } else {
+        } else if(deleteWord.getText().isEmpty()){
             message.setText("You need to type in word you want to delete.");
         }
     }
@@ -143,6 +144,22 @@ public class AddAndDelete  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        deleteWord.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!newValue.equals(""))
+                {
+
+                    listDeleteWord.setVisible(true);
+                    listDeleteWord.setDisable(false);
+                }
+                else {
+                    listDeleteWord.setDisable(true);
+                    listDeleteWord.setVisible(false);
+                }
+            }
+        });
+        listDeleteWord.setDisable(true);
         dictionary =new Dictionary();
         RequiredFieldValidator targetValidator = new RequiredFieldValidator();
         RequiredFieldValidator classValidator = new RequiredFieldValidator();
