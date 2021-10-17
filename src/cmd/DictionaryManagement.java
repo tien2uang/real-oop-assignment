@@ -229,6 +229,21 @@ public class DictionaryManagement extends Dictionary {
         }
     }
 
+    public Word getWord2(String wordTarget) {
+        try {
+            for (int i = 0; i < wordList.size(); i++) {
+                if (wordList.get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                    return wordList.get(i);
+                }
+            }
+            return null;
+        } catch (NullPointerException e) {
+            System.out.println("Error!");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void dictionarySearcher(String wordSearch) {
 
         ArrayList<Word> words = this.dictionaryData.searcher(wordSearch);
