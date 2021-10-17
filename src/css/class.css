@@ -118,3 +118,12 @@
 -fx-background-color:#ffffff;
 -fx-background-radius:30px;
 }
+.jfx-text-field
+{
+-fx-prompt-text-fill: #48a1d9;
+
+}
+.jfx-text-area
+{
+-fx-prompt-text-fill: #48a1d9;
+}

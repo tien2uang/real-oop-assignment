@@ -6,28 +6,15 @@ import cmd.Word;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-
-import java.awt.event.ActionEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
-
-import java.security.Key;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 
 
 public class EditWord  {
@@ -40,11 +27,11 @@ public class EditWord  {
     @FXML
     private  JFXTextField wordSpelling;
     @FXML
-    private  JFXTextField wordExplain;
+    private  JFXTextArea wordExplain;
     @FXML
     private  TextField inputSearch;
     @FXML
-    private  JFXTextArea notification;
+    private Label notification;
     @FXML
     private  Button submit;
     @FXML
@@ -78,7 +65,7 @@ public class EditWord  {
             this.dictionary.getWordList().remove(index);
             this.dictionary.addWord(new Word(target, explain, spellings, wordNewClass));
 
-            notification.clear();
+
             notification.setText("thanh cong");
 
             wordTarget.clear();
@@ -87,7 +74,7 @@ public class EditWord  {
             wordExplain.clear();
             checkBox.setSelected(false);
         } else if (isEmpty()) {
-            notification.clear();
+
             notification.setText("check Box or word your input");
         }
 
@@ -121,14 +108,14 @@ public class EditWord  {
                 wordSpelling.setText(this.dictionary.getWordList().get(index).getWordSpelling());
                 wordExplain.setText(this.dictionary.getWordList().get(index).getWordExplain());
 
-                notification.clear();
+
                 notification.setText("sua ben nay ==>");
             }
         } catch (NullPointerException e) {
             System.out.println("Error!");
         }
     }
-
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
     }
