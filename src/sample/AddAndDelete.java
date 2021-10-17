@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -82,31 +83,37 @@ public class AddAndDelete implements Initializable {
     }
 
     public void addWordToList(MouseEvent event) {
-        if (event.getSource() == saveAddWord && check.isSelected() && !isEmpty()) {
+        if (event.getSource() == saveAddWord) {
             message.setVisible(true);
-            if (!isExisting(addWordTarget.getText())) {
-                String target = addWordTarget.getText();
-                String wordNewClass = addWordClass.getText();
-                String spellings = addWordSpelling.getText();
-                String explain = addWordMeaning.getText();
-                (new Dictionary()).addWord(new Word(target, explain, spellings, wordNewClass));//can than
-                message.setText("Successfully! You have just added '" + addWordTarget.getText() + "' to the list.");
-                addWordTarget.clear();
-                addWordSpelling.clear();
-                addWordClass.clear();
-                addWordMeaning.clear();
-                check.setSelected(false);
+            if (check.isSelected() && !isEmpty()) {
+                if (!isExisting(addWordTarget.getText())) {
+                    String target = addWordTarget.getText();
+                    String wordNewClass = addWordClass.getText();
+                    String spellings = addWordSpelling.getText();
+                    String explain = addWordMeaning.getText();
+                    (new Dictionary()).addWord(new Word(target, explain, spellings, wordNewClass));//can than
+                    message.setTextFill(Color.web("#2ed758"));
+                    message.setText("Successfully! You have just added '" + addWordTarget.getText() + "' to the list.");
+                    addWordTarget.clear();
+                    addWordSpelling.clear();
+                    addWordClass.clear();
+                    addWordMeaning.clear();
+                    check.setSelected(false);
+                } else {
+                    message.setTextFill(Color.color(1, 0, 0));
+                    message.setText("Failed to add '" + addWordTarget.getText() + "' because the word is existing.");
+                    addWordClass.clear();
+                    addWordSpelling.clear();
+                    addWordTarget.clear();
+                    addWordMeaning.clear();
+                }
+            } else if (isEmpty()) {
+                message.setTextFill(Color.color(1, 0, 0));
+                message.setText("Any empty space must be filled.");
             } else {
-                message.setText("Failed to add '" + addWordTarget.getText() + "' because the word is existing.");
-                addWordClass.clear();
-                addWordSpelling.clear();
-                addWordTarget.clear();
-                addWordMeaning.clear();
+                message.setTextFill(Color.color(1, 0, 0));
+                message.setText("You need to click agreement checkbox for adding word.");
             }
-        } else if (isEmpty()) {
-            message.setText("Any empty space must be filled.");
-        } else {
-            message.setText("You need to click agreement checkbox for adding word.");
         }
     }
 
@@ -115,12 +122,15 @@ public class AddAndDelete implements Initializable {
             message.setVisible(true);
             if (isExisting(deleteWord.getText())) {
                 new DictionaryManagement(this.dictionary).removeWord(deleteWord.getText());
+                message.setTextFill(Color.web("#2ed758"));
                 message.setText("Successfully! You have just deleted '" + deleteWord.getText() + "' from the list.");
                 deleteWord.clear();
             } else {
+                message.setTextFill(Color.color(1, 0, 0));
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
-        } else if (deleteWord.getText().isEmpty()&& event.getCode() == KeyCode.ENTER ) {
+        } else if (deleteWord.getText().isEmpty() && event.getCode() == KeyCode.ENTER) {
+            message.setTextFill(Color.color(1, 0, 0));
             message.setText("You need to type in word you want to delete.");
             message.setVisible(true);
         }
@@ -145,6 +155,8 @@ public class AddAndDelete implements Initializable {
     public void clickToDelete(MouseEvent event) {
         if (event.getSource() == delete && (!deleteWord.getText().isEmpty())) {
             message.setVisible(true);
+            listDeleteWord.setDisable(true);
+            listDeleteWord.setVisible(false);
             if (isExisting(deleteWord.getText())) {
                 String deleteText = deleteWord.getText();
                 new DictionaryManagement(this.dictionary).removeWord(deleteText);
@@ -152,10 +164,12 @@ public class AddAndDelete implements Initializable {
                 message.setText("Successfully! You have just deleted '" + deleteText + "' from the list.");
                 deleteWord.clear();
             } else {
+                message.setTextFill(Color.color(1, 0, 0));
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
         } else if (event.getSource() == delete && (deleteWord.getText().isEmpty())) {
             message.setVisible(true);
+            message.setTextFill(Color.color(1, 0, 0));
             message.setText("You need to type in word you want to delete.");
         }
     }
