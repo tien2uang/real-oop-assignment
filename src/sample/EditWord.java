@@ -38,8 +38,8 @@ public class EditWord  {
     private  JFXCheckBox checkBox;
     @FXML
     private ListView<String> listEditWord;
-    @FXML
-    private MouseEvent event;
+
+    public String temp = "";
 
     public boolean isEmpty() {
         String textTarget = wordTarget.getText();
@@ -54,8 +54,7 @@ public class EditWord  {
 
         if (event.getSource() == submit && checkBox.isSelected() && !isEmpty()) {
 
-            String wordLookup = inputSearch.getText();
-            int index = this.dictionary.searchIndexWord(0, this.dictionary.getWordList().size(), wordLookup);
+            int index = this.dictionary.searchIndexWord(0, this.dictionary.getWordList().size(), temp);
 
             String target = wordTarget.getText();
             String wordNewClass = wordClass.getText();
@@ -108,7 +107,8 @@ public class EditWord  {
                 wordSpelling.setText(this.dictionary.getWordList().get(index).getWordSpelling());
                 wordExplain.setText(this.dictionary.getWordList().get(index).getWordExplain());
 
-
+                temp = inputMouseSetText;
+                inputSearch.clear();
                 notification.setText("sua ben nay ==>");
             }
         } catch (NullPointerException e) {
