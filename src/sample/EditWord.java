@@ -115,9 +115,14 @@ public class EditWord  {
             if(inputMouseSetText!="No result") {
                 inputSearch.setText(inputMouseSetText);
                 listEditWord.setVisible(false);
+                int index = this.dictionary.searchIndexWord(0, this.dictionary.getWordList().size(), inputMouseSetText);
+                wordTarget.setText(this.dictionary.getWordList().get(index).getWordTarget());
+                wordClass.setText(this.dictionary.getWordList().get(index).getWordClass());
+                wordSpelling.setText(this.dictionary.getWordList().get(index).getWordSpelling());
+                wordExplain.setText(this.dictionary.getWordList().get(index).getWordExplain());
 
                 notification.clear();
-                notification.setText("nhap ben nay ==>");
+                notification.setText("sua ben nay ==>");
             }
         } catch (NullPointerException e) {
             System.out.println("Error!");
