@@ -23,6 +23,10 @@ public class DictionaryManagement {
         dictionaryData = d;
     }
 
+    public static Dictionary getDictionary() {
+        return dictionaryData;
+    }
+
     public static ObservableList<Word> getHistoryList() {
         return historyList;
     }
@@ -140,6 +144,21 @@ public class DictionaryManagement {
             }
         }
 
+    }
+
+    public Word getWord2(String wordTarget) {
+        try {
+            for (int i = 0; i < this.getDictionaryData().getWordList().size(); i++) {
+                if (this.getDictionaryData().getWordList().get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
+                    return this.getDictionaryData().getWordList().get(i);
+                }
+            }
+            return null;
+        } catch (NullPointerException e) {
+            System.out.println("Error!");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void dictionarySearcher(String wordSearch) {
