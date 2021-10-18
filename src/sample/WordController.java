@@ -60,7 +60,7 @@ public class WordController implements Initializable {
     public void wordLookUp(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
-            Word word = new Dictionary().getWord2(wordLook);
+            Word word = new Dictionary().getWord(wordLook);
             if (word!=null) {
                 (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
                 wordSpellings.setText(word.getWordSpelling());
@@ -80,7 +80,7 @@ public class WordController implements Initializable {
             if(!inputMouseSetText.equals("No result")) {
                 inputSearch.setText(inputMouseSetText);
                 String wordMeaningMouseSetText = wordListSearch.getSelectionModel().getSelectedItem();
-                Word word = new Dictionary().getWord2(wordMeaningMouseSetText);
+                Word word = new Dictionary().getWord(wordMeaningMouseSetText);
                 (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
                 if (word.getWordSpelling().contains(";")) {
                     StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");

@@ -4,28 +4,24 @@ package cmd;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.Callback;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class DictionaryManagement {
     private static Dictionary dictionaryData;
     private final static int SINGLE_SPELLINGS = 2;
     private final static int MULTIPLE_SPELLINGS = 4;
-    private static final List<String> listWordTarget = new ArrayList<>();
-    public static final ObservableList<WordProperty> historyList = FXCollections.observableArrayList(new Callback<WordProperty, Observable[]>() {
-        @Override
-        public Observable[] call(WordProperty param) {
-            return new Observable[]{
-                    param.wordClassProperty(),param.wordExplainProperty(),param.wordSpellingProperty(), param.wordTargetProperty()
-            };
-        }
-    });
+    public static final ObservableList<WordProperty> historyList = FXCollections.observableArrayList(
+            param -> new Observable[]{
+                    param.wordClassProperty(), param.wordExplainProperty(), param.wordSpellingProperty(), param.wordTargetProperty()
+            });
 
 
     public DictionaryManagement(Dictionary d) {
@@ -47,14 +43,6 @@ public class DictionaryManagement {
             historyList.add(0, new WordProperty(word));
         }
     }
-
-    public void removeHistory(String target) {
-        Word word = dictionaryLookUp(target);
-        if (historyList.size() > 0) {
-            historyList.remove(word);
-        }
-    }
-
     public void insertFromCommandLine() {
         Scanner input = new Scanner(System.in);
         int wordCount = input.nextInt();
@@ -88,16 +76,11 @@ public class DictionaryManagement {
      * @return trả về null nếu không tìm thấy,còn không trả về Word
      */
     public Word dictionaryLookUp(String wordTarget) {
-        return dictionaryData.getWord2(wordTarget);
+        return dictionaryData.getWord(wordTarget);
     }
 
 
     public void showAllWords() {
-
-//         for (Word word : dictionaryData.getWordList()) {
-//         System.out.println(word.getWordTarget() + ": " + word.getWordExplain());
-//         }
-
         System.out.printf("%-5s|%-20s|%s%n", "No", "English", "Vietnamese");
         int size = dictionaryData.getWordListSize();
         for (int i = 0; i < size; i++) {
@@ -155,25 +138,8 @@ public class DictionaryManagement {
 
     }
 
-    public Word getWord2(String wordTarget) {
-        try {
-            for (int i = 0; i < this.getDictionaryData().getWordList().size(); i++) {
-                if (this.getDictionaryData().getWordList().get(i).getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
-                    return this.getDictionaryData().getWordList().get(i);
-                }
-            }
-            return null;
-        } catch (NullPointerException e) {
-            System.out.println("Error!");
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public void dictionarySearcher(String wordSearch) {
-
         ArrayList<Word> words = dictionaryData.searcher(wordSearch);
-
         for (Word word : words) {
             System.out.print(word.getWordTarget() + ", ");
         }
@@ -261,7 +227,6 @@ public class DictionaryManagement {
                             explain.append("-").append(text).append("\n");
                         }
                     }
-                    //  dictionaryData.getWordList().add(new Word(target, explain, spellings, wordClass));
                     dictionaryData.addWord(new Word(target, explain.toString(), spellings, wordClass));
 
 
@@ -287,7 +252,6 @@ public class DictionaryManagement {
                             explain.append(text).append("\n");
                         }
                     }
-
                     dictionaryData.addWord(new Word(target, explain.toString(), spellings, wordClass));
                 } else {
                     continue;

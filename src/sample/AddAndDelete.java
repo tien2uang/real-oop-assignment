@@ -3,11 +3,14 @@ package sample;
 import cmd.Dictionary;
 import cmd.DictionaryManagement;
 import cmd.Word;
+import cmd.WordProperty;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,7 +30,8 @@ import java.util.ResourceBundle;
 
 
 public class AddAndDelete implements Initializable {
-    Dictionary dictionary;
+    Dictionary dictionary = new Dictionary();
+    ;
     @FXML
     private JFXTextField addWordTarget;
 
@@ -57,9 +61,10 @@ public class AddAndDelete implements Initializable {
 
     @FXML
     private Label message;
+    private ObservableList<WordProperty> historyList = DictionaryManagement.getHistoryList();
 
     public boolean isExisting(String wordTarget) {
-        Word word = (new Dictionary()).getWord2(wordTarget);
+        Word word = (new Dictionary()).getWord(wordTarget);
         return (word != null) && (word.getWordTarget().compareToIgnoreCase(wordTarget) == 0);
     }
 
@@ -146,34 +151,48 @@ public class AddAndDelete implements Initializable {
         }
     }
 
+    private int isInHistoryList(String target) {
+        Word word = this.dictionary.getWord(target);
+        WordProperty wordProperty = new WordProperty(word);
+
+        return historyList.indexOf(wordProperty);
+    }
+
     public void clickToDelete(MouseEvent event) {
         if (event.getSource() == delete && (!deleteWord.getText().isEmpty())) {
+            String tempTarget =deleteWord.getText();
             message.setVisible(true);
             listDeleteWord.setDisable(true);
             listDeleteWord.setVisible(false);
             if (isExisting(deleteWord.getText())) {
+                if (isInHistoryList(tempTarget) != -1) {//xóa từ khỏi history
+                    Word word= new DictionaryManagement(dictionary).dictionaryLookUp(tempTarget);
+                    WordProperty wordProperty = new WordProperty(word);
+                    historyList.remove(wordProperty);
+                }
                 String deleteText = deleteWord.getText();
                 new DictionaryManagement(this.dictionary).removeWord(deleteText);
                 listDeleteWord.setItems((new DictionaryManagement(this.dictionary)).listTarget(deleteText));
                 message.setText("Successfully! You have just deleted '" + deleteText + "' from the list.");
                 deleteWord.clear();
             } else {
-                message.setTextFill(Color.color(1, 0, 0));
+                message.setTextFill(Color.web("#FF4D4F"));
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
         } else if (event.getSource() == delete && (deleteWord.getText().isEmpty())) {
             message.setVisible(true);
-            message.setTextFill(Color.color(1, 0, 0));
+            message.setTextFill(Color.web("#FF4D4F"));
             message.setText("You need to type in word you want to delete.");
         }
     }
-    public void reset()
-    {
+
+    public void reset() {
         addWordClass.clear();
         addWordSpelling.clear();
         addWordTarget.clear();
         addWordMeaning.clear();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         deleteWord.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -187,7 +206,6 @@ public class AddAndDelete implements Initializable {
             }
         });
         listDeleteWord.setDisable(true);
-        dictionary = new Dictionary();
         RequiredFieldValidator targetValidator = new RequiredFieldValidator();
         RequiredFieldValidator classValidator = new RequiredFieldValidator();
         RequiredFieldValidator spellingValidator = new RequiredFieldValidator();

@@ -62,20 +62,7 @@ public class Dictionary {
         }
     }
 
-    public Word getWord2(String wordTarget) {
-        try {
-            for (Word word : wordList) {
-                if (word.getWordTarget().compareToIgnoreCase(wordTarget) == 0) {
-                    return word;
-                }
-            }
-            return null;
-        } catch (NullPointerException e) {
-            System.out.println("Error!");
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
     public Word getWord(int i) {
         return wordList.get(i);
