@@ -61,22 +61,16 @@ public class WordController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             String wordLook = inputSearch.getText();
             Word word = new Dictionary().getWord2(wordLook);
-            (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
-//            if (word.getWordSpelling().contains(";")) {
-//                StringTokenizer wordText = new StringTokenizer(word.getWordSpelling(), ";");
-//                String firstSpelling = wordText.nextToken().trim();
-//                String secondSpelling = wordText.nextToken().trim();
-//                wordSpellings.setText(firstSpelling);
-//                wordSecondSpellings.setText(secondSpelling);
-//                wordSpellings.setText(word.getWordSpelling());
-//            } else {
-//                wordSpellings.setText(word.getWordSpelling());
-//                wordSecondSpellings.setText("");
-//            }
-            wordSpellings.setText(word.getWordSpelling());
-            wordTarget.setText(word.getWordTarget());
-            wordClass.setText(word.getWordClass());
-            wordMeaning.setText(word.getWordExplain());
+            if (word!=null) {
+                (new DictionaryManagement(this.dictionaryData)).insertHistory(word);
+                wordSpellings.setText(word.getWordSpelling());
+                wordTarget.setText(word.getWordTarget());
+                wordClass.setText(word.getWordClass());
+                wordMeaning.setText(word.getWordExplain());
+            }
+            else {
+                System.out.println("Khong tim thay word");
+            }
         }
     }
     

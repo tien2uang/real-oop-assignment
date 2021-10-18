@@ -24,7 +24,7 @@ public class Main extends Application {
         scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        new ZoomIn(root).setSpeed(0.7).play();
+        new ZoomIn(root).setSpeed(0.6).play();
         root.setOnMousePressed(event -> {
             x = event.getSceneX();
             y = event.getSceneY();
