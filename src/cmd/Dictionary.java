@@ -122,7 +122,7 @@ public class Dictionary {
      * @param target .
      * @return .
      */
-    public int StartWithWordSearch(int start, int end, String target) {
+    public int startWithWordSearch(int start, int end, String target) {
         try {
             while (start <= end) {
                 int middle = start + (end - start) / 2;
@@ -148,7 +148,7 @@ public class Dictionary {
 
     public ArrayList<Word> searcher(String wordSearch) {
         ArrayList<Word> result = new ArrayList<>();
-        int index = StartWithWordSearch(0, wordList.size() - 1, wordSearch);
+        int index = startWithWordSearch(0, wordList.size() - 1, wordSearch);
 
         if (index >= 0) {
             result.add(wordList.get(index));

@@ -1,8 +1,10 @@
 package cmd;
 
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +18,14 @@ public class DictionaryManagement {
     private final static int SINGLE_SPELLINGS = 2;
     private final static int MULTIPLE_SPELLINGS = 4;
     private static final List<String> listWordTarget = new ArrayList<>();
-    private static final ObservableList<Word> historyList = FXCollections.observableArrayList();
+    public static final ObservableList<WordProperty> historyList = FXCollections.observableArrayList(new Callback<WordProperty, Observable[]>() {
+        @Override
+        public Observable[] call(WordProperty param) {
+            return new Observable[]{
+                    param.wordClassProperty(),param.wordExplainProperty(),param.wordSpellingProperty(), param.wordTargetProperty()
+            };
+        }
+    });
 
 
     public DictionaryManagement(Dictionary d) {
@@ -27,15 +36,15 @@ public class DictionaryManagement {
         return dictionaryData;
     }
 
-    public static ObservableList<Word> getHistoryList() {
+    public static ObservableList<WordProperty> getHistoryList() {
         return historyList;
     }
 
     public void insertHistory(Word word) {
         if (historyList.size() == 0) {
-            historyList.add(word);
+            historyList.add(new WordProperty(word));
         } else {
-            historyList.add(0, word);
+            historyList.add(0, new WordProperty(word));
         }
     }
 
@@ -278,7 +287,7 @@ public class DictionaryManagement {
                             explain.append(text).append("\n");
                         }
                     }
-                    //dictionaryData.getWordList().add(new Word(target, explain, spellings, wordClass));
+
                     dictionaryData.addWord(new Word(target, explain.toString(), spellings, wordClass));
                 } else {
                     continue;

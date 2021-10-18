@@ -2,6 +2,7 @@ package sample;
 
 import animatefx.animation.ZoomIn;
 import cmd.Word;
+import cmd.WordProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,8 +73,8 @@ public class HistoryController {
         }
     }
 
-    public void setHistory(Word word) {
-        this.word = word;
+    public void setHistory(WordProperty wordProperty) {
+        this.word = wordProperty.getWord();
         targetLabel.setText(word.getWordTarget());
         spellingLabel.setText(word.getWordSpelling());
         classLabel.setText(word.getWordClass());

@@ -92,26 +92,20 @@ public class AddAndDelete implements Initializable {
                     String spellings = addWordSpelling.getText();
                     String explain = addWordMeaning.getText();
                     (new Dictionary()).addWord(new Word(target, explain, spellings, wordNewClass));//can than
-                    message.setTextFill(Color.web("#2ed758"));
+                    message.setTextFill(Color.web("#52C41A"));
                     message.setText("Successfully! You have just added '" + addWordTarget.getText() + "' to the list.");
-                    addWordTarget.clear();
-                    addWordSpelling.clear();
-                    addWordClass.clear();
-                    addWordMeaning.clear();
+                    reset();
                     check.setSelected(false);
                 } else {
-                    message.setTextFill(Color.color(1, 0, 0));
+                    message.setTextFill(Color.web("#FF4D4F"));
                     message.setText("Failed to add '" + addWordTarget.getText() + "' because the word is existing.");
-                    addWordClass.clear();
-                    addWordSpelling.clear();
-                    addWordTarget.clear();
-                    addWordMeaning.clear();
+                    reset();
                 }
             } else if (isEmpty()) {
-                message.setTextFill(Color.color(1, 0, 0));
+                message.setTextFill(Color.web("#FF4D4F"));
                 message.setText("Any empty space must be filled.");
             } else {
-                message.setTextFill(Color.color(1, 0, 0));
+                message.setTextFill(Color.web("#FF4D4F"));
                 message.setText("You need to click agreement checkbox for adding word.");
             }
         }
@@ -122,15 +116,15 @@ public class AddAndDelete implements Initializable {
             message.setVisible(true);
             if (isExisting(deleteWord.getText())) {
                 new DictionaryManagement(this.dictionary).removeWord(deleteWord.getText());
-                message.setTextFill(Color.web("#2ed758"));
+                message.setTextFill(Color.web("#52C41A"));
                 message.setText("Successfully! You have just deleted '" + deleteWord.getText() + "' from the list.");
                 deleteWord.clear();
             } else {
-                message.setTextFill(Color.color(1, 0, 0));
+                message.setTextFill(Color.web("#FF4D4F"));
                 message.setText("Failed to delete '" + deleteWord.getText() + "' because that word doesn't exist.");
             }
         } else if (deleteWord.getText().isEmpty() && event.getCode() == KeyCode.ENTER) {
-            message.setTextFill(Color.color(1, 0, 0));
+            message.setTextFill(Color.web("#FF4D4F"));
             message.setText("You need to type in word you want to delete.");
             message.setVisible(true);
         }
@@ -173,7 +167,13 @@ public class AddAndDelete implements Initializable {
             message.setText("You need to type in word you want to delete.");
         }
     }
-
+    public void reset()
+    {
+        addWordClass.clear();
+        addWordSpelling.clear();
+        addWordTarget.clear();
+        addWordMeaning.clear();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         deleteWord.textProperty().addListener((observable, oldValue, newValue) -> {

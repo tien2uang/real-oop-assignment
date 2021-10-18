@@ -1,7 +1,7 @@
 package sample;
 
 import cmd.DictionaryManagement;
-import cmd.Word;
+import cmd.WordProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,9 +60,9 @@ public class AdvancedController {
         }
 
         // History
-        DictionaryManagement.getHistoryList().addListener(new ListChangeListener<Word>() {
+        DictionaryManagement.getHistoryList().addListener(new ListChangeListener<WordProperty>() {
             @Override
-            public void onChanged(Change<? extends Word> c) {
+            public void onChanged(Change<? extends WordProperty> c) {
                 historyVBox.getChildren().clear();
                 ArrayList<HBox> nodeArrayList = new ArrayList<>();
                 for (int i = 0; i < DictionaryManagement.getHistoryList().size(); i++) {
@@ -74,7 +74,7 @@ public class AdvancedController {
                         nodeArrayList.add(fxmlLoader.load());
                         historyVBox.getChildren().add(nodeArrayList.get(i));
                         historyController.setHistory(DictionaryManagement.getHistoryList().get(i));
-                        System.out.println(DictionaryManagement.getHistoryList().get(i).getWordTarget());
+
                     } catch (Exception e) {
                         System.out.println("Khong tim thay HistoryFXML");
                         e.printStackTrace();
@@ -84,9 +84,4 @@ public class AdvancedController {
         });
 
     }
-
-
-//    public static VBox getHistoryVBox() {
-//        return historyVBox;
-//    }
 }

@@ -1,15 +1,18 @@
 package cmd;
 
+import java.util.Objects;
+
 public class Word {
     private String wordTarget;
     private String wordExplain;
     private String wordSpelling;
     private String wordClass;
 
-    public Word() { }
+    public Word() {
+    }
 
     public String getWordTarget() {
-        return  wordTarget;
+        return wordTarget;
     }
 
     public void setWordTarget(String wordTarget) {
@@ -21,8 +24,8 @@ public class Word {
     }
 
     public void setWordExplain(String wordExplain) {
-        this.wordExplain=wordExplain;
-    };
+        this.wordExplain = wordExplain;
+    }
 
     public String getWordSpelling() {
         return wordSpelling;
@@ -50,6 +53,22 @@ public class Word {
         this.wordExplain = wordExplain;
         this.wordSpelling = wordSpelling;
         this.wordClass = wordClass;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Word word = (Word) o;
+        return wordTarget.equals(word.wordTarget) &&
+                wordExplain.equals(word.wordExplain) &&
+                wordSpelling.equals(word.wordSpelling) &&
+                wordClass.equals(word.wordClass);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(wordTarget, wordExplain, wordSpelling, wordClass);
     }
 
 
