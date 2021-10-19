@@ -41,6 +41,10 @@ public class EditWord {
 
     public String tempTarget = "";
 
+    /**
+     * kiểm tra đã nhập từ hay chưa.
+     * @return
+     */
     public boolean isEmpty() {
         String textTarget = wordTarget.getText();
         String textSpelling = wordSpelling.getText();
@@ -49,6 +53,11 @@ public class EditWord {
         return ((textTarget.isEmpty()) || (textSpelling.isEmpty()) || (textClass.isEmpty()) || (textExplain.isEmpty()));
     }
 
+    /**
+     * update danh sách từ.
+     * @param word
+     * @param index
+     */
     private void updateHistoryList(Word word, int index) {
         historyList.get(index).setWordTarget(word.getWordTarget());
         historyList.get(index).setWordSpelling(word.getWordSpelling());
@@ -61,6 +70,10 @@ public class EditWord {
         return historyList.indexOf(wordProperty);
     }
 
+    /**
+     * sửa từ.
+     * @param event
+     */
     public void editWord(MouseEvent event) {
 
         if (event.getSource() == submit) {
@@ -95,12 +108,9 @@ public class EditWord {
 
     }
 
-
-    public void listViewWord() {
-        String word = inputSearch.getText();
-        listEditWord.setItems((new DictionaryManagement(this.dictionary)).listTarget(word));
-    }
-
+    /**
+     * update danh sách từ hiện ra.
+     */
     public void updateListView() {
         String word = inputSearch.getText();
         if (word.length() > 0) {
@@ -112,6 +122,10 @@ public class EditWord {
         listEditWord.setItems((new DictionaryManagement(this.dictionary)).listTarget(word));
     }
 
+    /**
+     * ấn vô từ để hiện ra từ tiếng Anh, phiên âm, loại từ, nghĩa của từ đang tra.
+     * @param event
+     */
     public void clickWord(MouseEvent event) {
         try {
             String inputMouseSetText = listEditWord.getSelectionModel().getSelectedItem();
