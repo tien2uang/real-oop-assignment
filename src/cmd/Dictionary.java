@@ -133,6 +133,11 @@ public class Dictionary {
         }
     }
 
+    /**
+     * danh sách các từ bắt đầu bằng wordSearch.
+     * @param wordSearch
+     * @return
+     */
     public ArrayList<Word> searcher(String wordSearch) {
         ArrayList<Word> result = new ArrayList<>();
         int index = startWithWordSearch(0, wordList.size() - 1, wordSearch);
