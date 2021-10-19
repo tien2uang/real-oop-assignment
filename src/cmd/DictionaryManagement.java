@@ -138,6 +138,10 @@ public class DictionaryManagement {
 
     }
 
+    /**
+     * in ra sanh sách tìm kiếm.
+     * @param wordSearch
+     */
     public void dictionarySearcher(String wordSearch) {
         ArrayList<Word> words = dictionaryData.searcher(wordSearch);
         for (Word word : words) {
