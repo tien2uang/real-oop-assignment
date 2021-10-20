@@ -168,6 +168,34 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * exportNew.
+     * @param words
+     * @param path
+     */
+    public void ExportToFile(ArrayList<Word> words, String path) {
+        try {
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Word word : words) {
+                bw.write(word.getWordTarget() + "\t" + word.getWordSpelling()  + "\t" + word.getWordClass() + "\t" );
+
+                StringTokenizer stringTokenizer = new StringTokenizer(word.getWordExplain(), "\n");
+                while (stringTokenizer.hasMoreTokens()) {
+                    String text = stringTokenizer.nextToken();
+                    bw.write(text);
+                }
+                bw.newLine();
+            }
+            bw.write("THE-END");
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public ObservableList<String> listTarget(String target) {
         int size = dictionaryData.getWordListSize();
         ObservableList<String> listTarget = FXCollections.observableArrayList();
